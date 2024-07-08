@@ -28,6 +28,7 @@ namespace SimpleCalculator
 
             calculator = new Clac(this);
 
+
         }
 
         private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
@@ -188,8 +189,10 @@ namespace SimpleCalculator
         }
 
         private void btnToggleSign_Click(object sender, EventArgs e)
+
         {
-          
+            double v = Double.Parse(textInput.Text);
+            textInput.Text = (-v).ToString();
         }
 
         
