@@ -26,7 +26,7 @@ namespace SimpleCalculator
 
 
 
-        string record = "0";//계산 결과를 히스토리에 넣는 변수
+        public string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
             char lastChar;
@@ -176,10 +176,11 @@ namespace SimpleCalculator
 
         private void btnToggleSign_Click(object sender, EventArgs e)
         {
-
+            Clac calculator = new Clac(this);
+            calculator.getResult();
         }
 
-
+        
 
     }
 }
