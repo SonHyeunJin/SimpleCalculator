@@ -69,8 +69,16 @@ namespace SimpleCalculator
                 textInput.Text = "0";
 
          }
-            
-            private void btnPlus_Click(object sender, EventArgs e)
+
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            textInput.Text = "0";// 입력창 초기화
+            textResult.Text = ""; // 결과값 초기화
+        }
+
+
+        private void btnPlus_Click(object sender, EventArgs e)
           {
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
@@ -165,8 +173,6 @@ namespace SimpleCalculator
         {
 
         }
-
-
 
     }
 }
