@@ -21,7 +21,6 @@ namespace SimpleCalculator
 
         }
 
-
         private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
         private char myOperator;  // 현재 계산할 Operator
 
@@ -44,7 +43,7 @@ namespace SimpleCalculator
         {
             Button btn = sender as Button;
 
-            if (textInput.Text == "0" || newButton == true)
+            if (textInput.Text == "0" || newButton)
             {
                 textInput.Text = btn.Text;
                 newButton = false; // 새로운 숫자 입력이 시작됨을 표시
