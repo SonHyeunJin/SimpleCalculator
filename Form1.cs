@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,11 +14,19 @@ namespace SimpleCalculator
 {
     public partial class CalculatorForm : Form
     {
+
+        public string record = "0";//계산 결과를 히스토리에 넣는 변수
+        private Clac calculator;
         public CalculatorForm()
         {
+            
             InitializeComponent();
 
+            
+
             textInput.Text = record.ToString();
+
+            calculator = new Clac(this);
 
         }
 
@@ -25,7 +34,7 @@ namespace SimpleCalculator
         private char myOperator;  // 현재 계산할 Operator
 
 
-        public string record = "0";//계산 결과를 히스토리에 넣는 변수
+      
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
             char lastChar;
@@ -53,6 +62,8 @@ namespace SimpleCalculator
                 textInput.Text += btn.Text; 
             }
             record += btn.Text;
+            Console.WriteLine(btn.Text+"btn");
+            Console.WriteLine(record+"record");
             FormatNumber(); // 포맷팅 적용
         }
 
@@ -71,7 +82,7 @@ namespace SimpleCalculator
         {
             textInput.Text = "0";// 입력창 초기화
             textResult.Text = ""; // 결과값 초기화
-            
+            record = "0";
         }
 
 
@@ -226,6 +237,11 @@ namespace SimpleCalculator
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
+
+            double finalResult = calculator.getResult();
+            Console.WriteLine(finalResult + "성공적으로 넘어온 계산 결과");
+            textResult.Text = finalResult.ToString();
+            record = finalResult.ToString();
 
         }
     }
