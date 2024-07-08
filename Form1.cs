@@ -12,7 +12,7 @@ namespace SimpleCalculator
 {
     public partial class CalculatorForm : Form
     {
-        public CalculatorForm()
+        public CalculatorForm() 
         {
             InitializeComponent();
 
