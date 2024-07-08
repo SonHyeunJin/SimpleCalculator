@@ -17,20 +17,19 @@ namespace SimpleCalculator
         {
             InitializeComponent();
 
-           textInput.Text = record.ToString();
-            
-        }
-        
-        private bool opFlag = false;
-        private bool memFlag = false;
+            textInput.Text = record.ToString();
 
+        }
+
+        private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
+        private char myOperator;  // 현재 계산할 Operator
 
 
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
             char lastChar;
-            if (record.Length >0)
+            if (record.Length > 0)
             {
                 lastChar = record[record.Length - 1];
                 Console.WriteLine(lastChar);
@@ -39,42 +38,40 @@ namespace SimpleCalculator
             lastChar = '0';
             return lastChar;
         }
-
-
-
-     
-
-
-        // 숫자 버튼 클릭시 숫자 구현
+        // 숫자 버튼 클릭 이벤트
         private void btnNumber_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
 
-            if (textInput.Text == "0" || opFlag == true || memFlag == true)
+            if (textInput.Text == "0" || newButton)
             {
                 textInput.Text = btn.Text;
-         
+                newButton = false; // 새로운 숫자 입력이 시작됨을 표시
             }
             else
-                textInput.Text = textInput.Text + btn.Text;
-
-
+            {
+                textInput.Text += btn.Text; 
+            }
+            record += btn.Text;
+            FormatNumber(); // 포맷팅 적용
         }
 
+    
         // 맨 뒤의 한 글자를 지우기
         private void btnDelete_Click(object sender, EventArgs e)
         {
             textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
             if (textInput.Text.Length == 0)
                 textInput.Text = "0";
-
-         }
+         
+        }
             
         // 초기화
         private void btnClear_Click(object sender, EventArgs e)
         {
             textInput.Text = "0";// 입력창 초기화
             textResult.Text = ""; // 결과값 초기화
+            
         }
 
 
@@ -89,13 +86,14 @@ namespace SimpleCalculator
                 sb.Length--;  // 마지막 문자 제거
                 record += "@+";
                 Console.WriteLine(checkLastChar(record));
+              
             }
             else
             {
                 textInput.Text += "+";
                 record += "@+";
             }
-            
+            newButton = true;
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -115,6 +113,7 @@ namespace SimpleCalculator
                 textInput.Text += "-";
                 record += "@-";
             }
+            newButton = true;
         }
 
         private void btnMultiply_Click(object sender, EventArgs e)
@@ -134,6 +133,7 @@ namespace SimpleCalculator
                 textInput.Text += "*";
                 record += "@*";
             }
+            newButton = true;
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
@@ -153,6 +153,7 @@ namespace SimpleCalculator
                 textInput.Text += "/";
                 record += "@/";
             }
+            newButton = true;
         }
 
         private void btnMod_Click(object sender, EventArgs e)
@@ -172,15 +173,60 @@ namespace SimpleCalculator
                 textInput.Text += "%";
                 record += "@%";
             }
+            newButton = true;
         }
 
         private void btnToggleSign_Click(object sender, EventArgs e)
         {
-            Clac calculator = new Clac(this);
-            calculator.getResult();
+          
         }
 
         
 
+        // 포맷팅 이벤트 핸들러 추가
+        private void InitializeFormatNumberHandlers()
+        {
+            foreach (var control in this.Controls)
+            {
+                if (control is Button btn)
+                {
+                    if (char.IsDigit(btn.Text, 0))
+                    {
+                        btn.Click += (sender, e) =>
+                        {
+                            FormatNumber();
+                        };
+                    }
+                    else if (btn.Text == "Delete")
+                    {
+                        btn.Click += (sender, e) =>
+                        {
+                            FormatNumber();
+                        };
+                    }
+                    else if (btn.Text == "Clear")
+                    {
+                        btn.Click += (sender, e) =>
+                        {
+                            FormatNumber();
+                        };
+                    }
+                }
+            }
+        }
+
+        // 숫자 3자리마다 쉼표 구현
+        private void FormatNumber()
+        {
+            if (decimal.TryParse(textInput.Text.Replace(",", ""), out decimal number))
+            {
+                textInput.Text = string.Format("{0:n0}", number);
+            }
+        }
+
+        private void btnEqual_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

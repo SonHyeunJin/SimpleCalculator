@@ -93,6 +93,7 @@
             this.btnEqual.TabIndex = 36;
             this.btnEqual.Text = "=";
             this.btnEqual.UseVisualStyleBackColor = true;
+            this.btnEqual.Click += new System.EventHandler(this.btnEqual_Click);
             // 
             // btnPlus
             // 
@@ -228,11 +229,13 @@
             // 
             // textResult
             // 
+            this.textResult.Font = new System.Drawing.Font("굴림", 20F);
             this.textResult.Location = new System.Drawing.Point(12, 177);
             this.textResult.Multiline = true;
             this.textResult.Name = "textResult";
             this.textResult.Size = new System.Drawing.Size(529, 86);
             this.textResult.TabIndex = 23;
+            this.textResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textInput
             // 
