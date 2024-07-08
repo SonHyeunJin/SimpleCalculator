@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SimpleCalculator
 {
@@ -15,12 +16,32 @@ namespace SimpleCalculator
         public CalculatorForm()
         {
             InitializeComponent();
+            textInput.Text = "0"; // 입력창을 0으로 초기화
+        }
 
+        private bool opFlag = false;
+        private bool memFlag = false;
 
-            Console.WriteLine("test");
+     
 
+        // 숫자 버튼 클릭시 숫자 구현
+        private void btnNumber_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
 
+            if (textInput.Text == "0" || opFlag == true || memFlag == true)
+            {
+                textInput.Text = btn.Text;
+         
+            }
+            else
+                textInput.Text = textInput.Text + btn.Text;
+
+      
             
         }
+
+
+
     }
 }
