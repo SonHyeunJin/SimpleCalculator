@@ -16,7 +16,7 @@ namespace SimpleCalculator
         {
             InitializeComponent();
 
-              dadad
+            
         }
     }
 }
