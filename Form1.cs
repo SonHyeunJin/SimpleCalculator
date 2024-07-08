@@ -25,6 +25,7 @@ namespace SimpleCalculator
         private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
         private char myOperator;  // 현재 계산할 Operator
 
+
         string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
@@ -38,6 +39,10 @@ namespace SimpleCalculator
             lastChar = '0';
             return lastChar;
         }
+
+
+
+     
 
 
         // 숫자 버튼 클릭시 숫자 구현
@@ -63,7 +68,7 @@ namespace SimpleCalculator
                 textInput.Text = "0";
 
          }
-
+            
         // 초기화
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -72,7 +77,7 @@ namespace SimpleCalculator
         }
 
 
-        private void btnPlus_Click(object sender, EventArgs e)
+            private void btnPlus_Click(object sender, EventArgs e)
           {
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
@@ -80,13 +85,14 @@ namespace SimpleCalculator
                 textInput.Text += "+";
                 StringBuilder sb = new StringBuilder(record);
                 sb.Length--;  // 마지막 문자 제거
-                record += "+";
+                sb.Length--;  // 마지막 문자 제거
+                record += "@+";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "+";
-                record += "+";
+                record += "@+";
             }
             
         }
@@ -99,13 +105,14 @@ namespace SimpleCalculator
                 textInput.Text += "-";
                 StringBuilder sb = new StringBuilder(record);
                 sb.Length--;  // 마지막 문자 제거
-                record += "-";
+                sb.Length--;  // 마지막 문자 제거
+                record += "@-";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "-";
-                record += "-";
+                record += "@-";
             }
         }
 
@@ -117,13 +124,14 @@ namespace SimpleCalculator
                 textInput.Text += "*";
                 StringBuilder sb = new StringBuilder(record);
                 sb.Length--;  // 마지막 문자 제거
-                record += "*";
+                sb.Length--;  // 마지막 문자 제거
+                record += "@*";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "*";
-                record += "*";
+                record += "@*";
             }
         }
 
@@ -135,13 +143,14 @@ namespace SimpleCalculator
                 textInput.Text += "/";
                 StringBuilder sb = new StringBuilder(record);
                 sb.Length--;  // 마지막 문자 제거
-                record += "/";
+                sb.Length--;  // 마지막 문자 제거
+                record += "@/";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "/";
-                record += "/";
+                record += "@/";
             }
         }
 
@@ -153,14 +162,14 @@ namespace SimpleCalculator
                 textInput.Text += "%";
                 StringBuilder sb = new StringBuilder(record);
                 sb.Length--;  // 마지막 문자 제거
-                record += "%";
+                sb.Length--;  // 마지막 문자 제거
+                record += "@%";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "%";
-                record += "%";
-
+                record += "@%";
             }
         }
 
@@ -168,6 +177,8 @@ namespace SimpleCalculator
         {
 
         }
+
+
 
     }
 }
