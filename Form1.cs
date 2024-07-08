@@ -15,6 +15,8 @@ namespace SimpleCalculator
         public CalculatorForm()
         {
             InitializeComponent();
+
+            MessageBox
         }
     }
 }
