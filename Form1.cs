@@ -25,7 +25,7 @@ namespace SimpleCalculator
         private char myOperator;  // 현재 계산할 Operator
 
 
-        string record = "0";//계산 결과를 히스토리에 넣는 변수
+        public string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
             char lastChar;
@@ -178,10 +178,10 @@ namespace SimpleCalculator
 
         private void btnToggleSign_Click(object sender, EventArgs e)
         {
-
+          
         }
 
-
+        
 
         // 포맷팅 이벤트 핸들러 추가
         private void InitializeFormatNumberHandlers()
