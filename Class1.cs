@@ -152,6 +152,52 @@ namespace SimpleCalculator
         }//end of getResult method
 
 
+        public void history ()//계산할 때마다 result값이 history 배열로 들어가게 하는 함수
+        {
+            string[] history = form.historyArray;
+            if (history.Length == 5)
+            {
+                
+                Console.WriteLine("삭제 전 배열:");
+                PrintArray(history);
+
+                // 배열의 첫 번째 요소를 삭제
+                history = RemoveFirstElement(history);
+
+                Console.WriteLine("삭제 후 배열:");
+                PrintArray(history);
+            }
+
+            string[] RemoveFirstElement(string[] array)//array[0]을 삭제하는 메서드
+            {
+                if (array.Length == 0)
+                {
+                    throw new InvalidOperationException("배열이 비어 있습니다.");
+                }
+
+                // 새로운 배열을 현재 배열보다 하나 작은 크기로 생성
+                string[] newArray = new string[array.Length - 1];
+
+                // 첫 번째 요소를 제외하고 나머지 요소를 새 배열로 복사
+                for (int i = 1; i < array.Length; i++)
+                {
+                    newArray[i - 1] = array[i];
+                }
+
+                return newArray;
+            }
+
+            void PrintArray(string[] array)//배열의 요소들을 출력하는 메서드
+            {
+                foreach (string item in array)
+                {
+                    Console.Write(item + " ");
+                }
+                Console.WriteLine();
+            }
+
+
+        }
 
     }
 }

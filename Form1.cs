@@ -17,6 +17,7 @@ namespace SimpleCalculator
 
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
         private Clac calculator;
+        public string[] historyArray = new string[5];//히스토리를 담는 배열
         public CalculatorForm()
         {
             
