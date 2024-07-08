@@ -41,44 +41,34 @@ namespace SimpleCalculator
 
 
 
-        // 숫자 3자리 마다 쉼표(,) 출력
-        private string FormatNumber(string number)
-        {
-            if (double.TryParse(number, out double parsedNumber))
-            {
-                return string.Format("{0:n0}", parsedNumber);
-            }
-            return number;
-        }
-
         // 숫자 버튼 클릭시 숫자 구현
         private void btnNumber_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            
-            if (textInput.Text == "0" || newButton == true)
+
+            if (textInput.Text == "0" || newButton)
             {
                 textInput.Text = btn.Text;
                 record += btn.Text;
             }
             else
             {
-              textInput.Text = FormatNumber(textInput.Text.Replace(",", "") + btn.Text);
-              record += btn.Text;
+                textInput.Text = btn.Text;
+                record += btn.Text;
             }
+             
         }
 
-
+     
         // 맨 뒤의 한 글자를 지우기
         private void btnDelete_Click(object sender, EventArgs e)
         {
             textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
             if (textInput.Text.Length == 0)
                 textInput.Text = "0";
-            else
-                textInput.Text = FormatNumber(textInput.Text);
-        }
 
+         }
+            
         // 초기화
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -87,8 +77,8 @@ namespace SimpleCalculator
         }
 
 
-        private void btnPlus_Click(object sender, EventArgs e)
-        {
+            private void btnPlus_Click(object sender, EventArgs e)
+          {
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -101,10 +91,10 @@ namespace SimpleCalculator
             }
             else
             {
-                textInput.Text = FormatNumber(textInput.Text.Replace(",", "")) + "+";
+                textInput.Text += "+";
                 record += "@+";
             }
-
+            
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -121,7 +111,7 @@ namespace SimpleCalculator
             }
             else
             {
-                textInput.Text = FormatNumber(textInput.Text.Replace(",", "")) + "-";
+                textInput.Text += "-";
                 record += "@-";
             }
         }
@@ -140,7 +130,7 @@ namespace SimpleCalculator
             }
             else
             {
-                textInput.Text = FormatNumber(textInput.Text.Replace(",", "")) + "*";
+                textInput.Text += "*";
                 record += "@*";
             }
         }
@@ -159,7 +149,7 @@ namespace SimpleCalculator
             }
             else
             {
-                textInput.Text = FormatNumber(textInput.Text.Replace(",", "")) + "/";
+                textInput.Text += "/";
                 record += "@/";
             }
         }
@@ -178,7 +168,7 @@ namespace SimpleCalculator
             }
             else
             {
-                textInput.Text = FormatNumber(textInput.Text.Replace(",", "")) + "%";
+                textInput.Text += "%";
                 record += "@%";
             }
         }
@@ -190,10 +180,5 @@ namespace SimpleCalculator
 
 
 
-
-
-
     }
 }
-
-
