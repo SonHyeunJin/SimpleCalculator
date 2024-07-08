@@ -37,14 +37,8 @@ namespace SimpleCalculator
             else
                 textInput.Text = textInput.Text + btn.Text;
 
-        }
-
-        // 맨 뒤의 한 글자를 지우기
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
-            if (textInput.Text.Length == 0)
-                textInput.Text = "0";
+      
+            
         }
 
 
