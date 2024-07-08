@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace SimpleCalculator
 {
@@ -15,9 +16,13 @@ namespace SimpleCalculator
         public CalculatorForm()
         {
             InitializeComponent();
+
            textInput.Text = record.ToString();
             
         }
+        
+        private bool opFlag = false;
+        private bool memFlag = false;
 
         string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
@@ -33,10 +38,26 @@ namespace SimpleCalculator
             return lastChar;
         }
 
-       
-        private void btnPlus_Click(object sender, EventArgs e)
+
+
+     
+
+        // 숫자 버튼 클릭시 숫자 구현
+        private void btnNumber_Click(object sender, EventArgs e)
         {
+            Button btn = sender as Button;
+
+            if (textInput.Text == "0" || opFlag == true || memFlag == true)
+            {
+                textInput.Text = btn.Text;
+         
+            }
+            else
+                textInput.Text = textInput.Text + btn.Text;
+         }
             
+            private void btnPlus_Click(object sender, EventArgs e)
+          {
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -130,5 +151,8 @@ namespace SimpleCalculator
         {
 
         }
+
+
+
     }
 }
