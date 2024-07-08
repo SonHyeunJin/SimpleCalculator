@@ -17,19 +17,19 @@ namespace SimpleCalculator
         {
             InitializeComponent();
 
-           textInput.Text = record.ToString();
-            
-        }
-        
-        private bool opFlag = false;
-        private bool memFlag = false;
+            textInput.Text = record.ToString();
 
+        }
+
+
+        private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
+        private char myOperator;  // 현재 계산할 Operator
 
         string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
             char lastChar;
-            if (record.Length >0)
+            if (record.Length > 0)
             {
                 lastChar = record[record.Length - 1];
                 Console.WriteLine(lastChar);
@@ -45,17 +45,16 @@ namespace SimpleCalculator
         {
             Button btn = sender as Button;
 
-            if (textInput.Text == "0" || opFlag == true || memFlag == true)
+            if (textInput.Text == "0" || newButton == true)
             {
                 textInput.Text = btn.Text;
-         
+                record += btn.Text;
             }
             else
                 textInput.Text = textInput.Text + btn.Text;
-
-
         }
 
+     
         // 맨 뒤의 한 글자를 지우기
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -161,6 +160,7 @@ namespace SimpleCalculator
             {
                 textInput.Text += "%";
                 record += "%";
+
             }
         }
 
