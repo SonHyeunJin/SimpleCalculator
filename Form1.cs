@@ -22,8 +22,6 @@ namespace SimpleCalculator
         private bool opFlag = false;
         private bool memFlag = false;
 
-     
-
         // 숫자 버튼 클릭시 숫자 구현
         private void btnNumber_Click(object sender, EventArgs e)
         {
@@ -37,8 +35,14 @@ namespace SimpleCalculator
             else
                 textInput.Text = textInput.Text + btn.Text;
 
-      
-            
+        }
+
+        // 맨 뒤의 한 글자를 지우기
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
+            if (textInput.Text.Length == 0)
+                textInput.Text = "0";
         }
 
 
