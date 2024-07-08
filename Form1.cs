@@ -16,6 +16,7 @@ namespace SimpleCalculator
         {
             InitializeComponent();
 
+            Console.WriteLine("test");
             
         }
     }
