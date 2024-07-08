@@ -42,9 +42,6 @@ namespace SimpleCalculator
 
 
 
-     
-
-
         // 숫자 버튼 클릭시 숫자 구현
         private void btnNumber_Click(object sender, EventArgs e)
         {
@@ -69,8 +66,16 @@ namespace SimpleCalculator
                 textInput.Text = "0";
 
          }
-            
-            private void btnPlus_Click(object sender, EventArgs e)
+
+        // 초기화
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            textInput.Text = "0";// 입력창 초기화
+            textResult.Text = ""; // 결과값 초기화
+        }
+
+
+        private void btnPlus_Click(object sender, EventArgs e)
           {
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
@@ -165,8 +170,5 @@ namespace SimpleCalculator
         {
 
         }
-
-
-
     }
 }
