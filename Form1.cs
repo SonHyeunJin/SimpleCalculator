@@ -224,24 +224,9 @@ namespace SimpleCalculator
             }
         }
 
+        private void btnEqual_Click(object sender, EventArgs e)
+        {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+        }
     }
 }
