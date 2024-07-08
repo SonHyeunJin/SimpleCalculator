@@ -96,6 +96,7 @@
             this.btnPlus.TabIndex = 35;
             this.btnPlus.Text = "+";
             this.btnPlus.UseVisualStyleBackColor = true;
+            this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
             // 
             // btnMinus
             // 
@@ -105,6 +106,7 @@
             this.btnMinus.TabIndex = 34;
             this.btnMinus.Text = "-";
             this.btnMinus.UseVisualStyleBackColor = true;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // btnMultiply
             // 
@@ -114,6 +116,7 @@
             this.btnMultiply.TabIndex = 33;
             this.btnMultiply.Text = "*";
             this.btnMultiply.UseVisualStyleBackColor = true;
+            this.btnMultiply.Click += new System.EventHandler(this.btnMultiply_Click);
             // 
             // btnDivide
             // 
@@ -123,6 +126,7 @@
             this.btnDivide.TabIndex = 32;
             this.btnDivide.Text = "/";
             this.btnDivide.UseVisualStyleBackColor = true;
+            this.btnDivide.Click += new System.EventHandler(this.btnDivide_Click);
             // 
             // btnMod
             // 
@@ -132,6 +136,7 @@
             this.btnMod.TabIndex = 31;
             this.btnMod.Text = "%";
             this.btnMod.UseVisualStyleBackColor = true;
+            this.btnMod.Click += new System.EventHandler(this.btnMod_Click);
             // 
             // btn0
             // 
@@ -220,6 +225,7 @@
             this.btnToggleSign.TabIndex = 43;
             this.btnToggleSign.Text = "+/-";
             this.btnToggleSign.UseVisualStyleBackColor = true;
+            this.btnToggleSign.Click += new System.EventHandler(this.btnToggleSign_Click);
             // 
             // btn7
             // 
