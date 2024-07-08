@@ -10,8 +10,8 @@ namespace SimpleCalculator
 {
     internal class Clac
     {
-       
-        public Clac(CalculatorForm formInstance) 
+        private CalculatorForm form;
+        public Clac(CalculatorForm formInstance)
         {
             form = formInstance;
         }
@@ -28,48 +28,44 @@ namespace SimpleCalculator
             List<string> operationList = new List<string>();
             string recordFrom = form.record;
 
-            recordFrom = "47@+45@*6";
+            string[] resultArray = recordFrom.Split('@');
 
-           
-
-                string[] resultArray = recordFrom.Split('@');
-
-                foreach (string result in resultArray)
+            foreach (string result in resultArray)
+            {
+                // 숫자와 연산자가 혼합된 경우 처리
+                string tempNumber = "";
+                foreach (char c in result)
                 {
-                    // 숫자와 연산자가 혼합된 경우 처리
-                    string tempNumber = "";
-                    foreach (char c in result)
+                    if (char.IsDigit(c))
                     {
-                        if (char.IsDigit(c))
-                        {
-                            tempNumber += c;
-                        }
-                        else
-                        {
-                            // tempNumber가 비어있지 않은 경우 숫자로 변환하여 numberList에 추가
-                            if (!string.IsNullOrEmpty(tempNumber))
-                            {
-                                numberList.Add(double.Parse(tempNumber));
-                                tempNumber = ""; // 초기화
-                            }
-                            // 연산자를 operationList에 추가
-                            operationList.Add(c.ToString());
-                        }
+                        tempNumber += c;
                     }
-                    // 남아있는 숫자가 있는 경우 numberList에 추가
-                    if (!string.IsNullOrEmpty(tempNumber))
+                    else
                     {
-                        numberList.Add(double.Parse(tempNumber));
+                        // tempNumber가 비어있지 않은 경우 숫자로 변환하여 numberList에 추가
+                        if (!string.IsNullOrEmpty(tempNumber))
+                        {
+                            numberList.Add(double.Parse(tempNumber));
+                            tempNumber = ""; // 초기화
+                        }
+                        // 연산자를 operationList에 추가
+                        operationList.Add(c.ToString());
                     }
                 }
-
-                // 숫자 리스트 출력
-                foreach (double number in numberList)
+                // 남아있는 숫자가 있는 경우 numberList에 추가
+                if (!string.IsNullOrEmpty(tempNumber))
                 {
-                    Console.WriteLine(number + "\r\n여기는 숫자 리스트 목록입니다.\r\n");
+                    numberList.Add(double.Parse(tempNumber));
                 }
-                while (listEmpty)
-                {
+            }
+
+            // 숫자 리스트 출력
+            foreach (double number in numberList)
+            {
+                Console.WriteLine(number + "\r\n여기는 숫자 리스트 목록입니다.\r\n");
+            }
+            while (listEmpty)
+            {
                 // 연산자 리스트 출력
                 for (int i = 0; i < operationList.Count; i++)
                 {
@@ -106,10 +102,10 @@ namespace SimpleCalculator
                                 break;
                         }
 
-                       
+
 
                     }
-                    
+
                 }
 
                 for (int i = 0; i < operationList.Count; i++)
@@ -119,7 +115,7 @@ namespace SimpleCalculator
                     double result = 0;
                     switch (operation)
                     {
-                       
+
                         case "+":
                             result = numberList[0] + numberList[1];
                             numberList[0] = result;
@@ -142,13 +138,14 @@ namespace SimpleCalculator
                 if (operationList.Count == 0)
                 {
                     listEmpty = false;
-                    
+
                 }
 
             }//end of while문
 
             double finalResult = numberList[0];
-            Console.WriteLine(finalResult+"이게 최종 연산 결과다!");
+            Console.WriteLine(finalResult + "이게 최종 연산 결과다!");
+            recordFrom = "0";
             return finalResult;
 
 
