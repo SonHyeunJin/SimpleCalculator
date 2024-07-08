@@ -24,6 +24,8 @@ namespace SimpleCalculator
         private bool opFlag = false;
         private bool memFlag = false;
 
+
+
         string record = "0";//계산 결과를 히스토리에 넣는 변수
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
@@ -42,6 +44,7 @@ namespace SimpleCalculator
 
      
 
+
         // 숫자 버튼 클릭시 숫자 구현
         private void btnNumber_Click(object sender, EventArgs e)
         {
@@ -54,6 +57,17 @@ namespace SimpleCalculator
             }
             else
                 textInput.Text = textInput.Text + btn.Text;
+
+
+        }
+
+        // 맨 뒤의 한 글자를 지우기
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
+            if (textInput.Text.Length == 0)
+                textInput.Text = "0";
+
          }
             
             private void btnPlus_Click(object sender, EventArgs e)
