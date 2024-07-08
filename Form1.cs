@@ -39,6 +39,7 @@ namespace SimpleCalculator
             return lastChar;
         }
 
+
         // 숫자 버튼 클릭시 숫자 구현
         private void btnNumber_Click(object sender, EventArgs e)
         {
