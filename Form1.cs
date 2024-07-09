@@ -25,11 +25,11 @@ namespace SimpleCalculator
             InitializeComponent();
 
             
-
             textInput.Text = record.ToString();
+  
 
             calculator = new Clac(this);
-    
+           
 
         }
 
@@ -43,6 +43,16 @@ namespace SimpleCalculator
                 e.Handled = true; // 이벤트 처리 여부를 true로 설정하여 입력을 거부
             }
         }
+        private void textResult_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 숫자와 백스페이스를 제외한 모든 키 입력을 막음
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // 이벤트 처리 여부를 true로 설정하여 입력을 거부
+            }
+        }
+
+
 
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
@@ -276,22 +286,10 @@ namespace SimpleCalculator
         }
 
         // 결과값 3자리마다 쉼표 삽입   
-        private static string commaProcedure(double v, string s)
+        private string FormatNumber(double number)
         {
-            int pos = 0;
-            if (s.Contains("."))
-            {
-                pos = s.Length - s.IndexOf(',');	// 소수점 아래 자리수 + 1
-              if (pos == 1)   // 맨 뒤에 소수점이 있으면 그대로 리턴
-                    return s;
-                string formatStr = "{0:N" + (pos - 1) + "}";
-                s = string.Format(formatStr, v);
-            }
-            else
-                s = string.Format("{0:N0}", v);
-            return s;
+            return string.Format("{0:N0}", number);
         }
-
 
         private bool IsDivideByZero(string record)
         {
@@ -327,7 +325,10 @@ namespace SimpleCalculator
             string stringResult = finalResult.ToString();
             Console.WriteLine(finalResult + "성공적으로 넘어온 계산 결과");
 
-            textResult.Text = stringResult;
+            // 포맷팅 적용
+            textResult.Text = FormatNumber(finalResult);
+
+            record = stringResult;
             record = stringResult;
             historyRecord = calculator.zeroCheck(historyRecord);
             historyRecord += " = " + stringResult;
@@ -340,6 +341,10 @@ namespace SimpleCalculator
         {
             calculator.showHistory(historyArray);
         }
+
+
+
+
 
     }
 }

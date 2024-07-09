@@ -51,9 +51,8 @@
             this.btn7 = new System.Windows.Forms.Button();
             this.btn4 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
-
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-
+            this.textProcess = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnClear
@@ -132,6 +131,7 @@
             this.btnMultiply.Text = "*";
             this.btnMultiply.UseVisualStyleBackColor = true;
             this.btnMultiply.Click += new System.EventHandler(this.btnMultiply_Click);
+            this.btnMultiply.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textInput_KeyPress);
             // 
             // btnDivide
             // 
@@ -241,6 +241,7 @@
             this.textResult.Size = new System.Drawing.Size(529, 75);
             this.textResult.TabIndex = 23;
             this.textResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textResult.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textResult_KeyPress);
             // 
             // textInput
             // 
@@ -298,23 +299,20 @@
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btnNumber_Click);
             // 
-
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-
+            // 
             // textProcess
             // 
-            this.textProcess.Font = new System.Drawing.Font("굴림", 20F);
+            this.textProcess.Font = new System.Drawing.Font("굴림", 14F);
             this.textProcess.Location = new System.Drawing.Point(12, 111);
             this.textProcess.Multiline = true;
             this.textProcess.Name = "textProcess";
             this.textProcess.Size = new System.Drawing.Size(529, 71);
             this.textProcess.TabIndex = 44;
-            this.textProcess.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-
             // 
             // CalculatorForm
             // 
@@ -377,7 +375,7 @@
         private System.Windows.Forms.Button btn1;
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-
+        private System.Windows.Forms.TextBox textProcess;
     }
 }
 
