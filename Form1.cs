@@ -17,21 +17,14 @@ namespace SimpleCalculator
 
         bool solveCheck = false;
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
-        public string historyRecord = "0";
-        private Clac calculator;
+        public string historyRecord = "0";    
         public string[] historyArray = new string[5];//히스토리를 담는 배열
+        private Clac calculator;
         public CalculatorForm()
         {
-            
             InitializeComponent();
-
-            
             textInput.Text = record.ToString();
-  
-
             calculator = new Clac(this);
-           
-
         }
 
         private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
@@ -44,7 +37,7 @@ namespace SimpleCalculator
             {
                 e.Handled = true; // 이벤트 처리 여부를 true로 설정하여 입력을 거부
             }
-            if(solveCheck == true)
+            if (solveCheck == true)
             {
                 if (char.IsDigit(e.KeyChar) || (e.KeyChar != '+' && e.KeyChar != '-' && e.KeyChar != '*' && e.KeyChar != '/' && e.KeyChar != '%'))
                 {
@@ -78,7 +71,7 @@ namespace SimpleCalculator
         // 숫자 버튼 클릭 이벤트
         private void btnNumber_Click(object sender, EventArgs e)
         {
-            if(solveCheck == false)
+            if (solveCheck == false)
             {
                 Button btn = sender as Button;
 
@@ -100,7 +93,7 @@ namespace SimpleCalculator
 
         }
 
-    
+
         // 맨 뒤의 한 글자를 지우기
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -108,25 +101,33 @@ namespace SimpleCalculator
             if (textInput.Text.Length == 0)
                 textInput.Text = "0";
             record = calculator.deleteLastElement(record);
-            Console.WriteLine(record+"record 한글자 지운 결과\r\n");
+            Console.WriteLine(record + "record 한글자 지운 결과\r\n");
             historyRecord = calculator.deleteLastElement(historyRecord);
             Console.WriteLine("historyRecord 한글자 지운 결과\r\n");
             Console.WriteLine($"{historyRecord}");
         }
-            
+
         // 초기화
         private void btnClear_Click(object sender, EventArgs e)
         {
             textInput.Text = "0";// 입력창 초기화
             textResult.Text = ""; // 결과값 초기화
+            textProcess.Text = "";// 계산 과정 텍스트 초기화
             record = "0";
             historyRecord = "0";
             solveCheck = false;
         }
 
 
-            private void btnPlus_Click(object sender, EventArgs e)
-          {
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            if (solveCheck)
+            {
+                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
+                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
+                solveCheck = false;
+
+            }
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -139,7 +140,7 @@ namespace SimpleCalculator
                 sb2.Length--;
                 historyRecord += "+";
                 Console.WriteLine(checkLastChar(record));
-              
+
             }
             else
             {
@@ -147,12 +148,21 @@ namespace SimpleCalculator
                 record += "@+";
                 historyRecord += "+";
             }
+
+
             newButton = true;
-            solveCheck = false;
+        
+            
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
+            if (solveCheck)
+            {
+                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
+                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
+                solveCheck = false;
+            }
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -173,11 +183,17 @@ namespace SimpleCalculator
                 historyRecord += "-";
             }
             newButton = true;
-            solveCheck = false;
+           
         }
 
         private void btnMultiply_Click(object sender, EventArgs e)
         {
+            if (solveCheck)
+            {
+                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
+                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
+                solveCheck = false;
+            }
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -198,11 +214,17 @@ namespace SimpleCalculator
                 historyRecord += "*";
             }
             newButton = true;
-            solveCheck = false;
+            
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
+            if (solveCheck)
+            {
+                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
+                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
+                solveCheck = false;
+            }
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -223,11 +245,17 @@ namespace SimpleCalculator
                 historyRecord += "/";
             }
             newButton = true;
-            solveCheck = false;
+            
         }
 
         private void btnMod_Click(object sender, EventArgs e)
         {
+            if (solveCheck)
+            {
+                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
+                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
+                solveCheck = false;
+            }
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -248,7 +276,7 @@ namespace SimpleCalculator
                 historyRecord += "%";
             }
             newButton = true;
-            solveCheck = false;
+            
         }
         // +/- 버튼 : -기호 붙이기/빼기
         private void btnToggleSign_Click(object sender, EventArgs e)
@@ -267,7 +295,7 @@ namespace SimpleCalculator
             
         }
 
-        
+
 
         // 포맷팅 이벤트 핸들러 추가
         private void InitializeFormatNumberHandlers()
@@ -301,6 +329,7 @@ namespace SimpleCalculator
             }
         }
 
+
         // 입력값 숫자 3자리마다 쉼표 구현
         private void FormatNumber()
         {
@@ -308,7 +337,7 @@ namespace SimpleCalculator
             {
                 textInput.Text = string.Format("{0:n0}", number);
             }
-          
+
 
         }
 
@@ -340,6 +369,54 @@ namespace SimpleCalculator
             return false;
         }
 
+        private string GetCalculationProcess(string record)
+        {
+            StringBuilder sb = new StringBuilder();
+            bool lastWasOperator = true; // 직전에 처리한 문자가 연산자였는지 여부 (처음에는 연산자로 가정)
+            StringBuilder numberBuffer = new StringBuilder(); // 숫자를 임시로 저장하는 버퍼
+
+            for (int i = 0; i < record.Length; i++)
+            {
+                char c = record[i];
+                if (char.IsDigit(c))
+                {
+                    numberBuffer.Append(c); // 숫자를 버퍼에 추가
+                    lastWasOperator = false; // 숫자 추가했으므로 연산자 플래그를 false로 설정
+                }
+                else if (c == '+' || c == '-' || c == '*' || c == '/' || c == '%')
+                {
+                    if (numberBuffer.Length > 0)
+                    {
+                        // 숫자가 버퍼에 있다면, 포맷하고 결과 문자열에 추가
+                        sb.Append(FormatNumber(numberBuffer.ToString()));
+                        numberBuffer.Clear(); // 버퍼 초기화
+                    }
+                    sb.Append($" {c} "); // 연산자 추가하고 연산자 양 옆에 공백 추가
+                    lastWasOperator = true; // 연산자 추가했으므로 연산자 플래그를 true로 설정
+                }
+            }
+
+            // 루프가 끝난 후에도 숫자가 버퍼에 남아있다면, 포맷하고 결과 문자열에 추가
+            if (numberBuffer.Length > 0)
+            {
+                sb.Append(FormatNumber(numberBuffer.ToString()));
+            }
+
+            return sb.ToString().Trim(); // 문자열의 앞뒤 공백 제거 후 반환
+        }
+
+        // 숫자를 3자리마다 쉼표로 포맷하는 메서드
+        private string FormatNumber(string number)
+        {
+            if (decimal.TryParse(number, out decimal parsedNumber))
+            {
+                return parsedNumber.ToString("N0");
+            }
+            return number;
+        }
+        //}
+
+
         private void btnEqual_Click(object sender, EventArgs e)
         {
             // 0으로 나누기를 체크하는 부분 추가
@@ -349,22 +426,29 @@ namespace SimpleCalculator
                 return;
             }
             double finalResult = calculator.getResult();
-            string stringResult = finalResult.ToString();
-            Console.WriteLine(finalResult + "성공적으로 넘어온 계산 결과");
+            //string stringResult = FormatNumber(finalResult);
 
-            // 포맷팅 적용
+
+            // 결과를 textResult에 표시하고 포맷팅
             textResult.Text = FormatNumber(finalResult);
 
-            record = stringResult;
-            record = stringResult;
-            historyRecord = calculator.zeroCheck(historyRecord);
-            historyRecord += " = " + stringResult;
+            // 계산 과정 문자열 준비
+            string calculationProcess = GetCalculationProcess(historyRecord);
+
+            // textProcess에 계산 과정 표시
+            textProcess.Text += calculationProcess + " = " + textResult.Text;
+
+            // 계산 완료 후 계산 기록 초기화
+            record = finalResult.ToString();
+            historyRecord = calculator.zeroCheck(historyRecord) + " = " + textResult.Text;
             historyArray = calculator.history(historyRecord);
-            stringResult = null;
+
+            // solveCheck 설정
             solveCheck = true;
 
-        }
 
+        }
+    
         private void btnHistory_Click(object sender, EventArgs e)
         {
             calculator.showHistory(historyArray);
@@ -381,11 +465,5 @@ namespace SimpleCalculator
             MessageBox.Show(message, "연산 기록");
         }
 
-
-
-
-
     }
 }
-
-
