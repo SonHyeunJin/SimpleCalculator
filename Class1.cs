@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,7 +20,6 @@ namespace SimpleCalculator
 
         public double getResult() // 계산하는 함수
         {
-
             bool listEmpty = true;
             List<double> numberList = new List<double>();
             List<string> operationList = new List<string>();
@@ -31,18 +31,31 @@ namespace SimpleCalculator
             {
                 // 숫자와 연산자가 혼합된 경우 처리
                 string tempNumber = "";
+                bool isNegative = false;
+
                 foreach (char c in result)
                 {
                     if (char.IsDigit(c))
                     {
                         tempNumber += c;
                     }
+                    else if (c == '~')
+                    {
+                        // ~을 만난 경우 다음 숫자는 음수로 변환
+                        isNegative = true;
+                    }
                     else
                     {
                         // tempNumber가 비어있지 않은 경우 숫자로 변환하여 numberList에 추가
                         if (!string.IsNullOrEmpty(tempNumber))
                         {
-                            numberList.Add(double.Parse(tempNumber));
+                            double number = double.Parse(tempNumber);
+                            if (isNegative)
+                            {
+                                number = -number;
+                                isNegative = false;
+                            }
+                            numberList.Add(number);
                             tempNumber = ""; // 초기화
                         }
                         // 연산자를 operationList에 추가
@@ -52,7 +65,12 @@ namespace SimpleCalculator
                 // 남아있는 숫자가 있는 경우 numberList에 추가
                 if (!string.IsNullOrEmpty(tempNumber))
                 {
-                    numberList.Add(double.Parse(tempNumber));
+                    double number = double.Parse(tempNumber);
+                    if (isNegative)
+                    {
+                        number = -number;
+                    }
+                    numberList.Add(number);
                 }
             }
 
@@ -73,7 +91,6 @@ namespace SimpleCalculator
 
                     if (operation == "*" || operation == "/" || operation == "%")
                     {
-
                         switch (operation)
                         {
                             case "*":
@@ -98,21 +115,15 @@ namespace SimpleCalculator
                                 Console.WriteLine("*/% 전용 연산 로직 연산 끝");
                                 break;
                         }
-
-
-
                     }
-
                 }
 
                 for (int i = 0; i < operationList.Count; i++)
                 {
-
                     string operation = operationList[0];
                     double result = 0;
                     switch (operation)
                     {
-
                         case "+":
                             result = numberList[0] + numberList[1];
                             numberList[0] = result;
@@ -129,22 +140,18 @@ namespace SimpleCalculator
                             Console.WriteLine("*/% 전용 연산 로직에 문제가 생김");
                             break;
                     }
-
                 }
 
                 if (operationList.Count == 0)
                 {
                     listEmpty = false;
-
                 }
-
             }//end of while문
 
             double finalResult = numberList[0];
             Console.WriteLine(finalResult + "이게 최종 연산 결과다!");
             recordFrom = "0";
             return finalResult;
-         
         }//end of getResult method
 
 
@@ -215,7 +222,7 @@ namespace SimpleCalculator
             return history;
         }
 
-        public string deleteLastElement(string element)
+        public string deleteLastElement(string element) // 한글자씩 지우기에 대한 로직
         {
            
 
@@ -286,6 +293,119 @@ namespace SimpleCalculator
             // 그 외의 경우에는 입력된 문자열 그대로 반환
             return input;
 
+        }
+
+        public string addMinus(string num)//+/- 로직
+        {
+            String noZero = zeroCheck(num);
+            string result = ModifyLastNumber(noZero);
+            Console.WriteLine(result+"~를 붙인 결과");
+            return result;
+        }
+
+        static string ModifyLastNumber(string input)
+        {
+            {
+                // 연산자들이 포함되어 있는지 확인
+                string operators = "+-*/%";
+                bool hasOperator = false;
+                foreach (char c in operators)
+                {
+                    if (input.Contains(c))
+                    {
+                        hasOperator = true;
+                        break;
+                    }
+                }
+
+                // 연산자가 없는 경우
+                if (!hasOperator)
+                {
+                    // 만약 이미 '~'가 있다면 제거, 없다면 '~' 추가
+                    if (input.StartsWith("~"))
+                    {
+                        return input.Substring(1);
+                    }
+                    else
+                    {
+                        return "~" + input;
+                    }
+                }
+                else
+                {
+                    // 연산자가 있는 경우 기존 로직 수행
+                    // 정규 표현식을 사용하여 '~'이 붙어 있는 마지막 숫자를 찾기
+                    string patternWithTilde = @"~(\d+)(?!.*\d)";
+                    // 정규 표현식을 사용하여 '~'이 없는 마지막 숫자를 찾기
+                    string patternWithoutTilde = @"(\d+)(?!.*\d)";
+
+                    // 기존에 '~'이 붙어 있는 경우 '~'을 제거
+                    if (Regex.IsMatch(input, patternWithTilde))
+                    {
+                        string result = Regex.Replace(input, patternWithTilde, "$1");
+                        return result;
+                    }
+                    else
+                    {
+                        // '~'이 없는 경우 '~'을 추가
+                        string result = Regex.Replace(input, patternWithoutTilde, "~$1");
+                        return result;
+                    }
+                }
+            }
+        }
+
+
+        public string addMinusHistory(string input1)
+        {
+            string input = zeroCheck(input1);
+
+            // 연산자들이 포함되어 있는지 확인
+            string operators = "+-*/%";
+            bool hasOperator = false;
+            foreach (char c in operators)
+            {
+                if (input.Contains(c))
+                {
+                    hasOperator = true;
+                    break;
+                }
+            }
+
+            // 연산자가 없는 경우
+            if (!hasOperator)
+            {
+                // 만약 이미 (-)가 있다면 괄호와 -를 제거, 없다면 괄호와 -를 추가
+                if (input.StartsWith("(-") && input.EndsWith(")"))
+                {
+                    return input.Substring(2, input.Length - 3);
+                }
+                else
+                {
+                    return $"(-{input})";
+                }
+            }
+            else
+            {
+                // 연산자가 있는 경우 기존 로직 수행
+                // 정규 표현식을 사용하여 (-숫자) 형태의 마지막 숫자를 찾기
+                string patternWithNegative = @"\(-(\d+)\)(?!.*\d)";
+                // 정규 표현식을 사용하여 (-숫자)가 아닌 마지막 숫자를 찾기
+                string patternWithoutNegative = @"(\d+)(?!.*\d)";
+
+                // 기존에 (-숫자) 형태가 있는 경우 이를 제거
+                if (Regex.IsMatch(input, patternWithNegative))
+                {
+                    string result = Regex.Replace(input, patternWithNegative, "$1");
+                    return result;
+                }
+                else
+                {
+                    // (-숫자) 형태가 없는 경우 이를 추가
+                    string result = Regex.Replace(input, patternWithoutNegative, "(-$1)");
+                    return result;
+                }
+            }
         }
 
     }

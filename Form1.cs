@@ -254,9 +254,17 @@ namespace SimpleCalculator
         private void btnToggleSign_Click(object sender, EventArgs e)
 
         {
-            double v = Double.Parse(textInput.Text);
-            textInput.Text = (-v).ToString();
-            FormatNumber(); // 포맷팅 적용
+            if (double.TryParse(textInput.Text, out double v))
+            {
+                v = Double.Parse(textInput.Text);
+                textInput.Text = (-v).ToString();
+                FormatNumber(); // 포맷팅 적용
+                record = calculator.addMinus(record);
+                Console.WriteLine("+/- 사용한 뒤의 record 결과" + record);
+                historyRecord = calculator.addMinusHistory(historyRecord);
+                Console.WriteLine("+/- 사용한 뒤의 historyRecord 결과" + historyRecord);
+            }
+            
         }
 
         
