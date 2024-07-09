@@ -25,6 +25,8 @@ namespace SimpleCalculator
             List<string> operationList = new List<string>();
             string recordFrom = form.record;
 
+            Console.WriteLine("getResult에 들어간 record : "+recordFrom);
+
             string[] resultArray = recordFrom.Split('@');
 
             foreach (string result in resultArray)
@@ -53,7 +55,7 @@ namespace SimpleCalculator
                             if (isNegative)
                             {
                                 number = -number;
-                                isNegative = false;
+                                isNegative = false; // 음수 플래그 초기화
                             }
                             numberList.Add(number);
                             tempNumber = ""; // 초기화
@@ -72,6 +74,9 @@ namespace SimpleCalculator
                     }
                     numberList.Add(number);
                 }
+
+                Console.WriteLine("isNegative 상태 : " +isNegative);
+
             }
 
             // 숫자 리스트 출력
@@ -149,10 +154,21 @@ namespace SimpleCalculator
             }//end of while문
 
             double finalResult = numberList[0];
+            
             Console.WriteLine(finalResult + "이게 최종 연산 결과다!");
             recordFrom = "0";
             return finalResult;
         }//end of getResult method
+
+        // 음수의 -를 ~로 대체하는 메서드
+        public string ReplaceNegativeSign(double number)
+        {
+            if (number < 0)
+            {
+                return "~" + Math.Abs(number);
+            }
+            return number.ToString();
+        }
 
 
         public string[] history (string record)//계산할 때마다 result값이 history 배열로 들어가게 하는 함수
@@ -322,7 +338,7 @@ namespace SimpleCalculator
                 if (!hasOperator)
                 {
                     // 만약 이미 '~'가 있다면 제거, 없다면 '~' 추가
-                    if (input.StartsWith("~"))
+                    if (input.EndsWith("~"))
                     {
                         return input.Substring(1);
                     }
