@@ -29,15 +29,21 @@ namespace SimpleCalculator
             textInput.Text = record.ToString();
 
             calculator = new Clac(this);
-
+    
 
         }
 
         private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
         private char myOperator;  // 현재 계산할 Operator
+        private void textInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // 숫자와 백스페이스를 제외한 모든 키 입력을 막음
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // 이벤트 처리 여부를 true로 설정하여 입력을 거부
+            }
+        }
 
-
-      
         public char checkLastChar(string record) // 히스토리 마지막 character 가져오는 메서드
         {
             char lastChar;
@@ -215,12 +221,13 @@ namespace SimpleCalculator
             }
             newButton = true;
         }
-
+        // +/- 버튼 : -기호 붙이기/빼기
         private void btnToggleSign_Click(object sender, EventArgs e)
 
         {
             double v = Double.Parse(textInput.Text);
             textInput.Text = (-v).ToString();
+            FormatNumber(); // 포맷팅 적용
         }
 
         
@@ -257,21 +264,69 @@ namespace SimpleCalculator
             }
         }
 
-        // 숫자 3자리마다 쉼표 구현
+        // 입력값 숫자 3자리마다 쉼표 구현
         private void FormatNumber()
         {
             if (decimal.TryParse(textInput.Text.Replace(",", ""), out decimal number))
             {
                 textInput.Text = string.Format("{0:n0}", number);
             }
+          
+
+        }
+
+        // 결과값 3자리마다 쉼표 삽입   
+        private static string commaProcedure(double v, string s)
+        {
+            int pos = 0;
+            if (s.Contains("."))
+            {
+                pos = s.Length - s.IndexOf(',');	// 소수점 아래 자리수 + 1
+              if (pos == 1)   // 맨 뒤에 소수점이 있으면 그대로 리턴
+                    return s;
+                string formatStr = "{0:N" + (pos - 1) + "}";
+                s = string.Format(formatStr, v);
+            }
+            else
+                s = string.Format("{0:N0}", v);
+            return s;
+        }
+
+
+        private bool IsDivideByZero(string record)
+        {
+            // 수식을 연산자 기준으로 분리하여 분할
+            string[] parts = record.Split('@');
+
+            // 분할된 각 부분에 대해 검사
+            foreach (string part in parts)
+            {
+                // 나눗셈 연산이 포함되어 있는 경우
+                if (part.Contains("/"))
+                {
+                    // 연산자를 기준으로 분리하여 오른쪽 피연산자가 0인지 확인
+                    string[] operands = part.Split('/');
+                    if (operands.Length == 2 && operands[1] == "0")
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
-
+            // 0으로 나누기를 체크하는 부분 추가
+            if (IsDivideByZero(record))
+            {
+                MessageBox.Show("0으로 나눌 수 없습니다", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             double finalResult = calculator.getResult();
             string stringResult = finalResult.ToString();
             Console.WriteLine(finalResult + "성공적으로 넘어온 계산 결과");
+
             textResult.Text = stringResult;
             record = stringResult;
             historyRecord = calculator.zeroCheck(historyRecord);
@@ -285,5 +340,8 @@ namespace SimpleCalculator
         {
             calculator.showHistory(historyArray);
         }
+
     }
 }
+
+
