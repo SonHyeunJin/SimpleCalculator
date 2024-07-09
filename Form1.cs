@@ -15,6 +15,7 @@ namespace SimpleCalculator
     public partial class CalculatorForm : Form
     {
 
+        bool solveCheck = false;
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
         public string historyRecord = "0";
         private Clac calculator;
@@ -38,9 +39,17 @@ namespace SimpleCalculator
         private void textInput_KeyPress(object sender, KeyPressEventArgs e)
         {
             // 숫자와 백스페이스를 제외한 모든 키 입력을 막음
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)
+                && e.KeyChar != '+' && e.KeyChar != '-' && e.KeyChar != '*' && e.KeyChar != '/' && e.KeyChar != '%')
             {
                 e.Handled = true; // 이벤트 처리 여부를 true로 설정하여 입력을 거부
+            }
+            if(solveCheck == true)
+            {
+                if (char.IsDigit(e.KeyChar) || (e.KeyChar != '+' && e.KeyChar != '-' && e.KeyChar != '*' && e.KeyChar != '/' && e.KeyChar != '%'))
+                {
+                    e.Handled = true;
+                }
             }
         }
 
@@ -59,22 +68,26 @@ namespace SimpleCalculator
         // 숫자 버튼 클릭 이벤트
         private void btnNumber_Click(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
+            if(solveCheck == false)
+            {
+                Button btn = sender as Button;
 
-            if (textInput.Text == "0" || newButton)
-            {
-                textInput.Text = btn.Text;
-                newButton = false; // 새로운 숫자 입력이 시작됨을 표시
+                if (textInput.Text == "0" || newButton)
+                {
+                    textInput.Text = btn.Text;
+                    newButton = false; // 새로운 숫자 입력이 시작됨을 표시
+                }
+                else
+                {
+                    textInput.Text += btn.Text;
+                }
+                record += btn.Text;
+                historyRecord += btn.Text;
+                Console.WriteLine(btn.Text + "btn");
+                Console.WriteLine(record + "record");
             }
-            else
-            {
-                textInput.Text += btn.Text; 
-            }
-            record += btn.Text;
-            historyRecord += btn.Text;
-            Console.WriteLine(btn.Text+"btn");
-            Console.WriteLine(record+"record");
             FormatNumber(); // 포맷팅 적용
+
         }
 
     
@@ -98,6 +111,7 @@ namespace SimpleCalculator
             textResult.Text = ""; // 결과값 초기화
             record = "0";
             historyRecord = "0";
+            solveCheck = false;
         }
 
 
@@ -124,6 +138,7 @@ namespace SimpleCalculator
                 historyRecord += "+";
             }
             newButton = true;
+            solveCheck = false;
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -148,6 +163,7 @@ namespace SimpleCalculator
                 historyRecord += "-";
             }
             newButton = true;
+            solveCheck = false;
         }
 
         private void btnMultiply_Click(object sender, EventArgs e)
@@ -172,6 +188,7 @@ namespace SimpleCalculator
                 historyRecord += "*";
             }
             newButton = true;
+            solveCheck = false;
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
@@ -196,6 +213,7 @@ namespace SimpleCalculator
                 historyRecord += "/";
             }
             newButton = true;
+            solveCheck = false;
         }
 
         private void btnMod_Click(object sender, EventArgs e)
@@ -220,6 +238,7 @@ namespace SimpleCalculator
                 historyRecord += "%";
             }
             newButton = true;
+            solveCheck = false;
         }
         // +/- 버튼 : -기호 붙이기/빼기
         private void btnToggleSign_Click(object sender, EventArgs e)
@@ -333,12 +352,24 @@ namespace SimpleCalculator
             historyRecord += " = " + stringResult;
             historyArray = calculator.history(historyRecord);
             stringResult = null;
+            solveCheck = true;
 
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
             calculator.showHistory(historyArray);
+
+            string message = "";
+
+            // 배열의 모든 요소를 message에 추가합니다.
+            foreach (string item in historyArray)
+            {
+                message += item + Environment.NewLine; // 각 요소를 새 줄에 출력하기 위해 Environment.NewLine 추가
+            }
+
+            // 메시지 박스에 출력합니다.
+            MessageBox.Show(message, "연산 기록");
         }
 
     }
