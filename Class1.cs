@@ -17,9 +17,6 @@ namespace SimpleCalculator
         }
 
 
-
-
-
         public double getResult() // 계산하는 함수
         {
 
@@ -147,8 +144,7 @@ namespace SimpleCalculator
             Console.WriteLine(finalResult + "이게 최종 연산 결과다!");
             recordFrom = "0";
             return finalResult;
-
-
+         
         }//end of getResult method
 
 
