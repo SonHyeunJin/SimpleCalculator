@@ -83,6 +83,7 @@
             this.btnHistory.TabIndex = 37;
             this.btnHistory.Text = "History";
             this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // btnEqual
             // 

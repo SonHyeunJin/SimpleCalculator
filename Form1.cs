@@ -16,6 +16,7 @@ namespace SimpleCalculator
     {
 
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
+        public string historyRecord = "0";
         private Clac calculator;
         public string[] historyArray = new string[5];//히스토리를 담는 배열
         public CalculatorForm()
@@ -64,6 +65,7 @@ namespace SimpleCalculator
                 textInput.Text += btn.Text; 
             }
             record += btn.Text;
+            historyRecord += btn.Text;
             Console.WriteLine(btn.Text+"btn");
             Console.WriteLine(record+"record");
             FormatNumber(); // 포맷팅 적용
@@ -76,7 +78,11 @@ namespace SimpleCalculator
             textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
             if (textInput.Text.Length == 0)
                 textInput.Text = "0";
-         
+            record = calculator.deleteLastElement(record);
+            Console.WriteLine(record+"record 한글자 지운 결과\r\n");
+            historyRecord = calculator.deleteLastElement(historyRecord);
+            Console.WriteLine("historyRecord 한글자 지운 결과\r\n");
+            Console.WriteLine($"{historyRecord}");
         }
             
         // 초기화
@@ -98,6 +104,9 @@ namespace SimpleCalculator
                 sb.Length--;  // 마지막 문자 제거
                 sb.Length--;  // 마지막 문자 제거
                 record += "@+";
+                StringBuilder sb2 = new StringBuilder(historyRecord);
+                sb2.Length--;
+                historyRecord += "+";
                 Console.WriteLine(checkLastChar(record));
               
             }
@@ -105,6 +114,7 @@ namespace SimpleCalculator
             {
                 textInput.Text += "+";
                 record += "@+";
+                historyRecord += "+";
             }
             newButton = true;
         }
@@ -119,12 +129,16 @@ namespace SimpleCalculator
                 sb.Length--;  // 마지막 문자 제거
                 sb.Length--;  // 마지막 문자 제거
                 record += "@-";
+                StringBuilder sb2 = new StringBuilder(historyRecord);
+                sb2.Length--;
+                historyRecord += "-";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "-";
                 record += "@-";
+                historyRecord += "-";
             }
             newButton = true;
         }
@@ -139,12 +153,16 @@ namespace SimpleCalculator
                 sb.Length--;  // 마지막 문자 제거
                 sb.Length--;  // 마지막 문자 제거
                 record += "@*";
+                StringBuilder sb2 = new StringBuilder(historyRecord);
+                sb2.Length--;
+                historyRecord += "*";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "*";
                 record += "@*";
+                historyRecord += "*";
             }
             newButton = true;
         }
@@ -159,12 +177,16 @@ namespace SimpleCalculator
                 sb.Length--;  // 마지막 문자 제거
                 sb.Length--;  // 마지막 문자 제거
                 record += "@/";
+                StringBuilder sb2 = new StringBuilder(historyRecord);
+                sb2.Length--;
+                historyRecord += "/";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "/";
                 record += "@/";
+                historyRecord += "/";
             }
             newButton = true;
         }
@@ -179,12 +201,16 @@ namespace SimpleCalculator
                 sb.Length--;  // 마지막 문자 제거
                 sb.Length--;  // 마지막 문자 제거
                 record += "@%";
+                StringBuilder sb2 = new StringBuilder(historyRecord);
+                sb2.Length--;
+                historyRecord += "%";
                 Console.WriteLine(checkLastChar(record));
             }
             else
             {
                 textInput.Text += "%";
                 record += "@%";
+                historyRecord += "%";
             }
             newButton = true;
         }
@@ -243,10 +269,17 @@ namespace SimpleCalculator
         {
 
             double finalResult = calculator.getResult();
+            string stringResult = finalResult.ToString();
+            historyArray = calculator.history(record);
             Console.WriteLine(finalResult + "성공적으로 넘어온 계산 결과");
             textResult.Text = finalResult.ToString();
             record = finalResult.ToString();
 
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

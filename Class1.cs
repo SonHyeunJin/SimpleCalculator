@@ -152,7 +152,7 @@ namespace SimpleCalculator
         }//end of getResult method
 
 
-        public void history ()//계산할 때마다 result값이 history 배열로 들어가게 하는 함수
+        public string[] history (string record)//계산할 때마다 result값이 history 배열로 들어가게 하는 함수
         {
             string[] history = form.historyArray;
             if (history.Length == 5)
@@ -167,6 +167,15 @@ namespace SimpleCalculator
                 Console.WriteLine("삭제 후 배열:");
                 PrintArray(history);
             }
+
+            history = AppendToLastElement(record, history);
+
+            foreach (string item in history)
+            {
+                Console.WriteLine($"{item}"+"history 배열에 들어간 요소들");
+            }
+
+            return history;
 
             string[] RemoveFirstElement(string[] array)//array[0]을 삭제하는 메서드
             {
@@ -191,12 +200,51 @@ namespace SimpleCalculator
             {
                 foreach (string item in array)
                 {
-                    Console.Write(item + " ");
+                    Console.WriteLine(item + " ");
                 }
                 Console.WriteLine();
             }
 
+        }
 
+        public string[] AppendToLastElement(string result, string[] history) //배열의 마지막 요소에 문자열 추가하는 메서드
+        {
+            // 배열의 마지막 요소에 문자열 추가
+            if (history.Length > 0)
+            {
+                history[history.Length - 1] += result;
+            }
+            return history;
+        }
+
+        public string deleteLastElement(string element)
+        {
+           
+
+            Console.WriteLine($"{element}"+"한글자 지우기 element와 result");
+
+            if (string.IsNullOrEmpty(element))
+            {
+                return element;
+            }
+
+            // 문자열을 문자 배열로 변환
+            char[] charArray = element.ToCharArray();
+
+            // 마지막 요소를 제거한 새로운 문자 배열 생성
+            char[] newArray = new char[charArray.Length - 1];
+            Array.Copy(charArray, newArray, charArray.Length - 1);
+
+            // 새로운 문자 배열을 문자열로 변환
+            string result = new string(newArray);
+
+            // 변환된 문자열의 마지막 요소가 '@'인 경우 '@'도 제거
+            if (result.EndsWith("@"))
+            {
+                result = result.Remove(result.Length - 1);
+            }
+
+            return result;
         }
 
     }
