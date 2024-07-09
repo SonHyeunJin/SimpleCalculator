@@ -303,23 +303,13 @@
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // textProcess
-            // 
-            this.textProcess.Font = new System.Drawing.Font("굴림", 14F);
-            this.textProcess.Location = new System.Drawing.Point(12, 111);
-            this.textProcess.Multiline = true;
-            this.textProcess.Name = "textProcess";
-            this.textProcess.Size = new System.Drawing.Size(529, 71);
-            this.textProcess.TabIndex = 44;
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 60);
             // 
             // CalculatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 686);
-            this.Controls.Add(this.textProcess);
             this.Controls.Add(this.btnToggleSign);
             this.Controls.Add(this.btn7);
             this.Controls.Add(this.btn4);
