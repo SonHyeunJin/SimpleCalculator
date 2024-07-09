@@ -50,6 +50,7 @@
             this.btn7 = new System.Windows.Forms.Button();
             this.btn4 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
+            this.textProcess = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnClear
@@ -230,22 +231,24 @@
             // textResult
             // 
             this.textResult.Font = new System.Drawing.Font("굴림", 20F);
-            this.textResult.Location = new System.Drawing.Point(12, 177);
+            this.textResult.Location = new System.Drawing.Point(12, 188);
             this.textResult.Multiline = true;
             this.textResult.Name = "textResult";
-            this.textResult.Size = new System.Drawing.Size(529, 86);
+            this.textResult.Size = new System.Drawing.Size(529, 75);
             this.textResult.TabIndex = 23;
             this.textResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textInput
             // 
             this.textInput.Font = new System.Drawing.Font("굴림", 20F);
+            this.textInput.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.textInput.Location = new System.Drawing.Point(12, 11);
             this.textInput.Multiline = true;
             this.textInput.Name = "textInput";
-            this.textInput.Size = new System.Drawing.Size(529, 160);
+            this.textInput.Size = new System.Drawing.Size(529, 94);
             this.textInput.TabIndex = 22;
             this.textInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textInput_KeyPress);
             // 
             // btnToggleSign
             // 
@@ -291,11 +294,22 @@
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btnNumber_Click);
             // 
+            // textProcess
+            // 
+            this.textProcess.Font = new System.Drawing.Font("굴림", 20F);
+            this.textProcess.Location = new System.Drawing.Point(12, 111);
+            this.textProcess.Multiline = true;
+            this.textProcess.Name = "textProcess";
+            this.textProcess.Size = new System.Drawing.Size(529, 71);
+            this.textProcess.TabIndex = 44;
+            this.textProcess.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // CalculatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 686);
+            this.Controls.Add(this.textProcess);
             this.Controls.Add(this.btnToggleSign);
             this.Controls.Add(this.btn7);
             this.Controls.Add(this.btn4);
@@ -349,6 +363,7 @@
         private System.Windows.Forms.Button btn7;
         private System.Windows.Forms.Button btn4;
         private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.TextBox textProcess;
     }
 }
 
