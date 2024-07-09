@@ -91,6 +91,7 @@ namespace SimpleCalculator
             textInput.Text = "0";// 입력창 초기화
             textResult.Text = ""; // 결과값 초기화
             record = "0";
+            historyRecord = "0";
         }
 
 
@@ -270,16 +271,19 @@ namespace SimpleCalculator
 
             double finalResult = calculator.getResult();
             string stringResult = finalResult.ToString();
-            historyArray = calculator.history(record);
             Console.WriteLine(finalResult + "성공적으로 넘어온 계산 결과");
-            textResult.Text = finalResult.ToString();
-            record = finalResult.ToString();
+            textResult.Text = stringResult;
+            record = stringResult;
+            historyRecord = calculator.zeroCheck(historyRecord);
+            historyRecord += " = " + stringResult;
+            historyArray = calculator.history(historyRecord);
+            stringResult = null;
 
         }
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
-            
+            calculator.showHistory(historyArray);
         }
     }
 }

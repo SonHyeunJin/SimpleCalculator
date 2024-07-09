@@ -155,7 +155,7 @@ namespace SimpleCalculator
         public string[] history (string record)//계산할 때마다 result값이 history 배열로 들어가게 하는 함수
         {
             string[] history = form.historyArray;
-            if (history.Length == 5)
+            if (history.Length == 5 && IsArrayFullyPopulated(history))
             {
                 
                 Console.WriteLine("삭제 전 배열:");
@@ -184,16 +184,15 @@ namespace SimpleCalculator
                     throw new InvalidOperationException("배열이 비어 있습니다.");
                 }
 
-                // 새로운 배열을 현재 배열보다 하나 작은 크기로 생성
-                string[] newArray = new string[array.Length - 1];
-
-                // 첫 번째 요소를 제외하고 나머지 요소를 새 배열로 복사
                 for (int i = 1; i < array.Length; i++)
                 {
-                    newArray[i - 1] = array[i];
+                    array[i - 1] = array[i];
                 }
 
-                return newArray;
+                // 마지막 인덱스를 null 또는 기본 값으로 설정
+                array[array.Length - 1] = null;
+
+                return array;
             }
 
             void PrintArray(string[] array)//배열의 요소들을 출력하는 메서드
@@ -209,10 +208,13 @@ namespace SimpleCalculator
 
         public string[] AppendToLastElement(string result, string[] history) //배열의 마지막 요소에 문자열 추가하는 메서드
         {
-            // 배열의 마지막 요소에 문자열 추가
-            if (history.Length > 0)
+            for (int i = 0; i<history.Length; i++)
             {
-                history[history.Length - 1] += result;
+                if (string.IsNullOrEmpty(history[i]))
+                {
+                    history[i] = result;
+                    return history;
+                }
             }
             return history;
         }
@@ -245,6 +247,49 @@ namespace SimpleCalculator
             }
 
             return result;
+        }
+
+        public void showHistory(string[] historyArray)
+        {
+            foreach(string item in historyArray)
+            {
+            Console.WriteLine(item + "history item 목록 "); 
+            }
+        }
+
+        bool IsArrayFullyPopulated(string[] array)//배열에 있는 모든 인덱스가 차있는지 확인하는 메서드
+        {
+            foreach (var element in array)
+            {
+                if (element == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public string zeroCheck(string input)
+        {
+
+            // 입력된 문자열이 null 또는 빈 문자열인 경우 그대로 반환
+            if (string.IsNullOrEmpty(input))
+            {
+                return input;
+            }
+
+            Console.WriteLine(input.Substring(1)+"\r\nsubstring(1)한 결과");
+
+            // 첫 번째 문자가 '0'인 경우
+            if (input[0] == '0')
+            {
+                // 첫 번째 문자를 제외한 나머지 문자열을 반환
+                return input.Substring(1);
+            }
+
+            // 그 외의 경우에는 입력된 문자열 그대로 반환
+            return input;
+
         }
 
     }
