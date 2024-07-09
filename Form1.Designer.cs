@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnHistory = new System.Windows.Forms.Button();
@@ -50,7 +51,9 @@
             this.btn7 = new System.Windows.Forms.Button();
             this.btn4 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
-            this.textProcess = new System.Windows.Forms.TextBox();
+
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+
             this.SuspendLayout();
             // 
             // btnClear
@@ -84,6 +87,7 @@
             this.btnHistory.TabIndex = 37;
             this.btnHistory.Text = "History";
             this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // btnEqual
             // 
@@ -294,6 +298,13 @@
             this.btn1.UseVisualStyleBackColor = true;
             this.btn1.Click += new System.EventHandler(this.btnNumber_Click);
             // 
+
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+
             // textProcess
             // 
             this.textProcess.Font = new System.Drawing.Font("굴림", 20F);
@@ -303,6 +314,7 @@
             this.textProcess.Size = new System.Drawing.Size(529, 71);
             this.textProcess.TabIndex = 44;
             this.textProcess.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+
             // 
             // CalculatorForm
             // 
@@ -363,7 +375,9 @@
         private System.Windows.Forms.Button btn7;
         private System.Windows.Forms.Button btn4;
         private System.Windows.Forms.Button btn1;
-        private System.Windows.Forms.TextBox textProcess;
+
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+
     }
 }
 
