@@ -86,8 +86,8 @@ namespace SimpleCalculator
                 }
                 record += btn.Text;
                 historyRecord += btn.Text;
-                Console.WriteLine(btn.Text + "btn");
-                Console.WriteLine(record + "record");
+                Console.WriteLine("btn 숫자 버튼 클릭 이벤트 : " + btn.Text);
+                Console.WriteLine("숫자 버튼 클릭 이후 record 값 : " + record);
             }
             FormatNumber(); // 포맷팅 적용
 
@@ -121,13 +121,7 @@ namespace SimpleCalculator
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            if (solveCheck)
-            {
-                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
-                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
-                solveCheck = false;
-
-            }
+          
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -157,12 +151,7 @@ namespace SimpleCalculator
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            if (solveCheck)
-            {
-                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
-                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
-                solveCheck = false;
-            }
+            
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -188,12 +177,7 @@ namespace SimpleCalculator
 
         private void btnMultiply_Click(object sender, EventArgs e)
         {
-            if (solveCheck)
-            {
-                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
-                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
-                solveCheck = false;
-            }
+           
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -219,12 +203,7 @@ namespace SimpleCalculator
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
-            if (solveCheck)
-            {
-                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
-                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
-                solveCheck = false;
-            }
+            
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -250,12 +229,7 @@ namespace SimpleCalculator
 
         private void btnMod_Click(object sender, EventArgs e)
         {
-            if (solveCheck)
-            {
-                textProcess.Text = ""; // 새로운 연산이 시작될 때 textProcess 초기화
-                record = textInput.Text; // 이전 결과를 새로운 연산의 시작 값으로 사용
-                solveCheck = false;
-            }
+            
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -426,6 +400,8 @@ namespace SimpleCalculator
                 return;
             }
             double finalResult = calculator.getResult();
+            Console.WriteLine("계산 직후 finalResult 값 : "+finalResult);
+            
             //string stringResult = FormatNumber(finalResult);
 
 
@@ -438,8 +414,18 @@ namespace SimpleCalculator
             // textProcess에 계산 과정 표시
             textProcess.Text += calculationProcess + " = " + textResult.Text;
 
+            Console.WriteLine("finalResult 음수 확인 직전" + finalResult);
             // 계산 완료 후 계산 기록 초기화
-            record = finalResult.ToString();
+            if (finalResult < 0) // 결과값이 음수일 경우
+            {
+                record =calculator.ReplaceNegativeSign(finalResult);
+                Console.WriteLine("음수 추가 후 record : "+record);
+            }
+            else
+            {
+                record = finalResult.ToString();
+            }
+           
             historyRecord = calculator.zeroCheck(historyRecord) + " = " + textResult.Text;
             historyArray = calculator.history(historyRecord);
 
