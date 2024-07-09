@@ -52,6 +52,7 @@
             this.btn4 = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.textProcess = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnClear
@@ -130,6 +131,7 @@
             this.btnMultiply.Text = "*";
             this.btnMultiply.UseVisualStyleBackColor = true;
             this.btnMultiply.Click += new System.EventHandler(this.btnMultiply_Click);
+            this.btnMultiply.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textInput_KeyPress);
             // 
             // btnDivide
             // 
@@ -239,6 +241,7 @@
             this.textResult.Size = new System.Drawing.Size(529, 75);
             this.textResult.TabIndex = 23;
             this.textResult.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textResult.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textResult_KeyPress);
             // 
             // textInput
             // 
@@ -362,6 +365,7 @@
         private System.Windows.Forms.Button btn1;
 
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.TextBox textProcess;
     }
 }
 
