@@ -91,6 +91,12 @@ namespace SimpleCalculator
             }
             FormatNumber(); // 포맷팅 적용
 
+            btnPlus.Enabled = true;
+            btnMinus.Enabled = true;
+            btnMultiply.Enabled = true;
+            btnDivide.Enabled = true;
+            btnMod.Enabled = true;
+
         }
 
 
@@ -99,7 +105,22 @@ namespace SimpleCalculator
         {
             textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
             if (textInput.Text.Length == 0)
+            {
                 textInput.Text = "0";
+                solveCheck = false;
+
+            }
+
+            if (record.Length == 0)
+            {
+
+                btnPlus.Enabled = false;
+                btnMinus.Enabled = false;
+                btnMultiply.Enabled = false;
+                btnDivide.Enabled = false;
+                btnMod.Enabled = false;
+            }
+               
             record = calculator.deleteLastElement(record);
             Console.WriteLine(record + "record 한글자 지운 결과\r\n");
             historyRecord = calculator.deleteLastElement(historyRecord);
@@ -116,6 +137,11 @@ namespace SimpleCalculator
             record = "0";
             historyRecord = "0";
             solveCheck = false;
+            btnPlus.Enabled = true;
+            btnMinus.Enabled = true;
+            btnMultiply.Enabled = true;
+            btnDivide.Enabled = true;
+            btnMod.Enabled = true;
         }
 
 
