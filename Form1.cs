@@ -427,8 +427,8 @@ namespace SimpleCalculator
             }
             double finalResult = calculator.getResult();
             Console.WriteLine("계산 직후 finalResult 값 : "+finalResult);
-            
-            //string stringResult = FormatNumber(finalResult);
+
+            string stringResult = FormatNumber(finalResult);
 
 
             // 결과를 textResult에 표시하고 포맷팅
