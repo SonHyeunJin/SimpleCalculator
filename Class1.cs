@@ -37,7 +37,7 @@ namespace SimpleCalculator
 
                 foreach (char c in result)
                 {
-                    if (char.IsDigit(c))
+                    if (char.IsDigit(c) || c == '.')
                     {
                         tempNumber += c;
                     }
