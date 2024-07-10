@@ -438,7 +438,7 @@ namespace SimpleCalculator
             string calculationProcess = GetCalculationProcess(historyRecord);
 
             // textProcess에 계산 과정 표시
-            textProcess.Text += calculationProcess + " = " + textResult.Text;
+            textProcess.Text = calculationProcess + " = " + textResult.Text;
 
             Console.WriteLine("finalResult 음수 확인 직전" + finalResult);
             // 계산 완료 후 계산 기록 초기화
