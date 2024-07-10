@@ -344,7 +344,7 @@ namespace SimpleCalculator
         // 결과값 3자리마다 쉼표 삽입   
         private string FormatNumber(double number)
         {
-            return string.Format("{0:N0}", number);
+            return string.Format("{0:N}", number);
         }
 
         private bool IsDivideByZero(string record)
