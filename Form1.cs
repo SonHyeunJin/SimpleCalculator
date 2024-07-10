@@ -121,7 +121,7 @@ namespace SimpleCalculator
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-          
+            solveCheck = false;
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -151,7 +151,7 @@ namespace SimpleCalculator
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            
+            solveCheck = false;
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -177,7 +177,7 @@ namespace SimpleCalculator
 
         private void btnMultiply_Click(object sender, EventArgs e)
         {
-           
+            solveCheck = false;
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -203,7 +203,7 @@ namespace SimpleCalculator
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
-            
+            solveCheck = false;
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
@@ -229,7 +229,7 @@ namespace SimpleCalculator
 
         private void btnMod_Click(object sender, EventArgs e)
         {
-            
+            solveCheck = false;
             if (checkLastChar(record) == '+' || checkLastChar(record) == '-' || checkLastChar(record) == '*' || checkLastChar(record) == '/' || checkLastChar(record) == '%')
             {
                 textInput.Text = textInput.Text.Remove(textInput.Text.Length - 1);
