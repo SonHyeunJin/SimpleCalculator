@@ -21,6 +21,7 @@ namespace SimpleCalculator
         public string historyRecord = "0";    
         public string[] historyArray = new string[5];//히스토리를 담는 배열
         public string[] startArray = new string[5];
+        private List<string> historyList;
         private Clac calculator;
         private string filePath;
         public CalculatorForm()
@@ -39,17 +40,27 @@ namespace SimpleCalculator
             // 파일 경로 설정 (예: 사용자이름 폴더 내의 data.txt 파일)
             filePath = Path.Combine(folderPath, "history.txt");
 
-            // historyArray 초기화 (예시로 빈 배열로 초기화)
-            startArray = calculator.LoadArrayFromFile(filePath);
+            // historyArray 초기화 
+            List<string> startList = calculator.LoadArrayFromFile(filePath);
+            
 
-            foreach( string item in startArray)
+
+            foreach( string item in startList)
             {
                 pastHistory.Items.Add(item);
-                Console.WriteLine("프로그램 시작시 startArray의 아이템들 : "+item);
+                Console.WriteLine("프로그램 시작시 startList의 아이템들 : "+item);
             }
 
-            
-                historyArray = new string[5]; // 길이가 5인 배열로 초기화
+            historyList = new List<string>();
+
+            foreach (string item in historyList)
+            {
+                pastHistory.Items.Add(item);
+                Console.WriteLine("프로그램 시작시 historyList의 아이템들 : " + item);
+            }
+
+
+            historyArray = new string[5]; // 길이가 5인 배열로 초기화
             
 
             Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : "+historyArray.Length);
@@ -485,6 +496,7 @@ namespace SimpleCalculator
             }
            
             historyRecord = calculator.zeroCheck(historyRecord) + " = " + textResult.Text;
+            historyList.Add(historyRecord);
             Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyRecord에 들어간 값 : "+historyRecord);
             historyArray = calculator.history(historyRecord);
             Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyArray에 들어간 값" + historyArray[0]);
@@ -513,11 +525,26 @@ namespace SimpleCalculator
 
         private void OnProcessExit(object sender, EventArgs e)
         {
-            calculator.SaveArrayToFile(historyArray, filePath);
-            Console.WriteLine("프로그램이 종료됩니다. 배열이 파일에 저장되었습니다.");
+            foreach (string item in historyList)
+            {
+                Console.WriteLine("historyList에 있는 값들: " + item);
+            }
+
+            if (File.Exists(filePath))
+            {
+                // 파일이 이미 존재하면 기존 파일에 추가
+                File.AppendAllLines(filePath, historyList);
+            }
+            else
+            {
+                // 파일이 없으면 새로 생성하여 기록
+                File.WriteAllLines(filePath, historyList);
+            }
+
+            Console.WriteLine("프로그램이 종료됩니다. historyList가 파일에 저장되었습니다.");
         }
 
-       
+
 
     }
 }
