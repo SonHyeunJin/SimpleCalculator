@@ -366,9 +366,9 @@
             // 
             this.pastHistory.FormattingEnabled = true;
             this.pastHistory.ItemHeight = 15;
-            this.pastHistory.Location = new System.Drawing.Point(608, 23);
+            this.pastHistory.Location = new System.Drawing.Point(608, 27);
             this.pastHistory.Name = "pastHistory";
-            this.pastHistory.Size = new System.Drawing.Size(339, 94);
+            this.pastHistory.Size = new System.Drawing.Size(339, 79);
             this.pastHistory.TabIndex = 54;
             // 
             // button2
@@ -394,7 +394,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(607, 686);
             this.ClientSize = new System.Drawing.Size(959, 686);
             this.Controls.Add(this.resetPastHistory);
             this.Controls.Add(this.button2);

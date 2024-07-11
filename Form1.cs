@@ -475,12 +475,16 @@ namespace SimpleCalculator
             double finalResult = calculator.getResult();
             Console.WriteLine("계산 직후 finalResult 값 : " + finalResult);
 
-            string stringResult = FormatNumber(finalResult);
+            //string stringResult = FormatNumber(finalResult);
+            // 정수 부분만 추출하여 문자열로 변환
+            string stringResult = ((int)finalResult).ToString();
 
 
             // 결과를 textResult에 표시하고 포맷팅
-            textResult.Text = FormatNumber(finalResult);
-            this.result = Convert.ToInt32(textResult.Text.Substring(0, textResult.Text.IndexOf('.')));
+            //textResult.Text = FormatNumber(finalResult);
+            //this.result = Convert.ToInt32(textResult.Text.Substring(0, textResult.Text.IndexOf('.')));
+            textResult.Text = stringResult;
+            this.result = Convert.ToInt32(stringResult);
 
 
             // 계산 과정 문자열 준비
@@ -576,3 +580,4 @@ namespace SimpleCalculator
         }
     }
 }
+    
