@@ -18,12 +18,15 @@ namespace SimpleCalculator
 
         bool solveCheck = false;
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
-        public string historyRecord = "0";    
+        public string historyRecord = "0";
         public string[] historyArray = new string[5];//히스토리를 담는 배열
         public string[] startArray = new string[5];
         private List<string> historyList;
         private Clac calculator;
         private string filePath;
+        private int result;
+
+        public CalculatorForm()
         public closePastHistoryButton()
         {
             InitializeComponent();
@@ -65,7 +68,7 @@ namespace SimpleCalculator
             historyArray = new string[5]; // 길이가 5인 배열로 초기화
             
 
-            Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : "+historyArray.Length);
+            Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : " + historyArray.Length);
 
             // 종료 시 이벤트 핸들러 설정
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -164,7 +167,7 @@ namespace SimpleCalculator
                 btnDivide.Enabled = false;
                 btnMod.Enabled = false;
             }
-               
+
             record = calculator.deleteLastElement(record);
             Console.WriteLine(record + "record 한글자 지운 결과\r\n");
             historyRecord = calculator.deleteLastElement(historyRecord);
@@ -215,8 +218,8 @@ namespace SimpleCalculator
 
 
             newButton = true;
-        
-            
+
+
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -242,7 +245,7 @@ namespace SimpleCalculator
                 historyRecord += "-";
             }
             newButton = true;
-           
+
         }
 
         private void btnMultiply_Click(object sender, EventArgs e)
@@ -268,7 +271,7 @@ namespace SimpleCalculator
                 historyRecord += "*";
             }
             newButton = true;
-            
+
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
@@ -294,7 +297,7 @@ namespace SimpleCalculator
                 historyRecord += "/";
             }
             newButton = true;
-            
+
         }
 
         private void btnMod_Click(object sender, EventArgs e)
@@ -320,7 +323,7 @@ namespace SimpleCalculator
                 historyRecord += "%";
             }
             newButton = true;
-            
+
         }
         // +/- 버튼 : -기호 붙이기/빼기
         private void btnToggleSign_Click(object sender, EventArgs e)
@@ -336,7 +339,7 @@ namespace SimpleCalculator
                 historyRecord = calculator.addMinusHistory(historyRecord);
                 Console.WriteLine("+/- 사용한 뒤의 historyRecord 결과" + historyRecord);
             }
-            
+
         }
 
 
@@ -471,13 +474,15 @@ namespace SimpleCalculator
                 return;
             }
             double finalResult = calculator.getResult();
-            Console.WriteLine("계산 직후 finalResult 값 : "+finalResult);
+            Console.WriteLine("계산 직후 finalResult 값 : " + finalResult);
 
             string stringResult = FormatNumber(finalResult);
 
 
             // 결과를 textResult에 표시하고 포맷팅
             textResult.Text = FormatNumber(finalResult);
+            this.result = Convert.ToInt32(textResult.Text.Substring(0, textResult.Text.IndexOf('.')));
+
 
             // 계산 과정 문자열 준비
             string calculationProcess = GetCalculationProcess(historyRecord);
@@ -489,14 +494,14 @@ namespace SimpleCalculator
             // 계산 완료 후 계산 기록 초기화
             if (finalResult < 0) // 결과값이 음수일 경우
             {
-                record =calculator.ReplaceNegativeSign(finalResult);
-                Console.WriteLine("음수 추가 후 record : "+record);
+                record = calculator.ReplaceNegativeSign(finalResult);
+                Console.WriteLine("음수 추가 후 record : " + record);
             }
             else
             {
                 record = finalResult.ToString();
             }
-           
+
             historyRecord = calculator.zeroCheck(historyRecord) + " = " + textResult.Text;
             historyList.Add(historyRecord);
             Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyRecord에 들어간 값 : "+historyRecord);
@@ -508,7 +513,7 @@ namespace SimpleCalculator
             solveCheck = true;
 
         }
-    
+
         private void btnHistory_Click(object sender, EventArgs e)
         {
             calculator.showHistory(historyArray);
@@ -546,7 +551,29 @@ namespace SimpleCalculator
             Console.WriteLine("프로그램이 종료됩니다. historyList가 파일에 저장되었습니다.");
         }
 
+        private void radioButtonBinary_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonBinary.Checked == true)
+            {
+                textResult.Text = Convert.ToString(this.result, 2);
 
+            }
+        }
 
+        private void radioButtonDecimal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDecimal.Checked == true)
+            {
+                textResult.Text = Convert.ToString(this.result);
+            }
+        }
+
+        private void radioButtonHexadecimal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonHexadecimal.Checked == true)
+            {
+                textResult.Text = Convert.ToString(this.result, 16);
+            }
+        }
     }
 }

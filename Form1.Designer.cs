@@ -334,6 +334,7 @@
             this.radioButtonHexadecimal.TabStop = true;
             this.radioButtonHexadecimal.Text = "16진수";
             this.radioButtonHexadecimal.UseVisualStyleBackColor = true;
+            this.radioButtonHexadecimal.CheckedChanged += new System.EventHandler(this.radioButtonHexadecimal_CheckedChanged);
             // 
             // radioButtonDecimal
             // 
@@ -346,6 +347,7 @@
             this.radioButtonDecimal.TabStop = true;
             this.radioButtonDecimal.Text = "10진수";
             this.radioButtonDecimal.UseVisualStyleBackColor = true;
+            this.radioButtonDecimal.CheckedChanged += new System.EventHandler(this.radioButtonDecimal_CheckedChanged);
             // 
             // radioButtonBinary
             // 
@@ -358,6 +360,7 @@
             this.radioButtonBinary.TabStop = true;
             this.radioButtonBinary.Text = "2진수";
             this.radioButtonBinary.UseVisualStyleBackColor = true;
+            this.radioButtonBinary.CheckedChanged += new System.EventHandler(this.radioButtonBinary_CheckedChanged);
             // 
             // pastHistory
             // 
@@ -391,6 +394,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(607, 686);
             this.ClientSize = new System.Drawing.Size(959, 686);
             this.Controls.Add(this.resetPastHistory);
             this.Controls.Add(this.button2);
