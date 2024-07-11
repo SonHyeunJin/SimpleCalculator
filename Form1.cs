@@ -39,7 +39,6 @@ namespace SimpleCalculator
 
             // 폴더가 존재하지 않으면 생성
             Directory.CreateDirectory(folderPath);
-
             // 파일 경로 설정 (예: 사용자이름 폴더 내의 data.txt 파일)
             filePath = Path.Combine(folderPath, "history.txt");
 
