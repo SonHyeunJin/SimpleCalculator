@@ -61,7 +61,8 @@ namespace SimpleCalculator
                 Console.WriteLine("프로그램 시작시 historyList의 아이템들 : " + item);
             }
 
-            Form2 f2 = new Form2(historyList);
+          
+            Form2 f2 = new Form2(startList);
             f2.ShowDialog();
 
             historyArray = new string[5]; // 길이가 5인 배열로 초기화
