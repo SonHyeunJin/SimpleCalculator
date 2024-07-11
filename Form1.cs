@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace SimpleCalculator
 {
-    public partial class CalculatorForm : Form
+    public partial class closePastHistoryButton : Form
     {
 
         bool solveCheck = false;
@@ -24,7 +24,7 @@ namespace SimpleCalculator
         private List<string> historyList;
         private Clac calculator;
         private string filePath;
-        public CalculatorForm()
+        public closePastHistoryButton()
         {
             InitializeComponent();
             textInput.Text = record.ToString();
@@ -42,10 +42,10 @@ namespace SimpleCalculator
 
             // historyArray 초기화 
             List<string> startList = calculator.LoadArrayFromFile(filePath);
+
             
 
-
-            foreach( string item in startList)
+            foreach ( string item in startList)
             {
                 pastHistory.Items.Add(item);
                 Console.WriteLine("프로그램 시작시 startList의 아이템들 : "+item);
@@ -59,6 +59,8 @@ namespace SimpleCalculator
                 Console.WriteLine("프로그램 시작시 historyList의 아이템들 : " + item);
             }
 
+            Form2 f2 = new Form2(historyList);
+            f2.ShowDialog();
 
             historyArray = new string[5]; // 길이가 5인 배열로 초기화
             

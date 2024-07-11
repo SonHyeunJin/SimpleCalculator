@@ -12,8 +12,8 @@ namespace SimpleCalculator
 {
     internal class Clac
     {
-        private CalculatorForm form;
-        public Clac(CalculatorForm formInstance)
+        private closePastHistoryButton form;
+        public Clac(closePastHistoryButton formInstance)
         {
             form = formInstance;
         }
