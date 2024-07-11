@@ -369,7 +369,7 @@ namespace SimpleCalculator
         // 결과값 3자리마다 쉼표 삽입   
         private string FormatNumber(double number)
         {
-            return string.Format("{0:N0}", number);
+            return string.Format("{0:N}", number);
         }
 
         private bool IsDivideByZero(string record)
@@ -483,6 +483,8 @@ namespace SimpleCalculator
             historyArray = calculator.history(historyRecord);
             Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyArray에 들어간 값" + historyArray[0]);
             historyRecord = finalResult.ToString();
+
+
 
             // solveCheck 설정
             solveCheck = true;
