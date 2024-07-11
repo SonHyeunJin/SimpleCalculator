@@ -456,6 +456,8 @@ namespace SimpleCalculator
             historyArray = calculator.history(historyRecord);
             historyRecord = finalResult.ToString();
 
+
+
             // solveCheck 설정
             solveCheck = true;
 
