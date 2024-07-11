@@ -591,5 +591,22 @@ namespace SimpleCalculator
             button2.Show();
             openEveryHistory.Hide();
         }
+
+        private void resetPastHistory_Click(object sender, EventArgs e)//everyhistory 초기화 버튼
+        {
+            // 파일 초기화
+            File.WriteAllText(filePath, string.Empty);
+
+            // 히스토리 리스트와 리스트박스 초기화
+            historyList.Clear();
+            pastHistory.Items.Clear();
+
+            // 히스토리 배열 초기화
+            historyArray = new string[5];
+
+            // 사용자에게 알림
+            MessageBox.Show("모든 기록이 초기화되었습니다.", "초기화 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    
     }
 }

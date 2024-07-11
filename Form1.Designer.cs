@@ -391,6 +391,7 @@
             this.resetPastHistory.TabIndex = 57;
             this.resetPastHistory.Text = "초기화";
             this.resetPastHistory.UseVisualStyleBackColor = true;
+            this.resetPastHistory.Click += new System.EventHandler(this.resetPastHistory_Click);
             // 
             // openEveryHistory
             // 
