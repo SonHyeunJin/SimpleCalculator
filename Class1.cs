@@ -173,6 +173,7 @@ namespace SimpleCalculator
 
         public string[] history (string record)//계산할 때마다 result값이 history 배열로 들어가게 하는 함수
         {
+            Console.WriteLine("history 메서드에 입장~");
             string[] history = form.historyArray;
             if (history.Length == 5 && IsArrayFullyPopulated(history))
             {
@@ -193,7 +194,7 @@ namespace SimpleCalculator
             {
                 Console.WriteLine($"{item}"+"history 배열에 들어간 요소들");
             }
-
+            Console.WriteLine("history 메서드가 지난 후 history라는 array의 길이 : "+history.Length);
             return history;
 
             string[] RemoveFirstElement(string[] array)//array[0]을 삭제하는 메서드
@@ -421,6 +422,23 @@ namespace SimpleCalculator
                     string result = Regex.Replace(input, patternWithoutNegative, "(-$1)");
                     return result;
                 }
+            }
+        }
+
+        public void SaveArrayToFile(string[] array, string filePath)
+        {
+            System.IO.File.WriteAllLines(filePath, array);
+        }
+
+        public string[] LoadArrayFromFile(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                return System.IO.File.ReadAllLines(filePath);
+            }
+            else
+            {
+                return new string[5]; // 파일이 없으면 5개짜리 배열로 반환
             }
         }
 

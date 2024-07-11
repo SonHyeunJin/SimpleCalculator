@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -20,11 +21,35 @@ namespace SimpleCalculator
         public string historyRecord = "0";    
         public string[] historyArray = new string[5];//히스토리를 담는 배열
         private Clac calculator;
+        private string filePath;
         public CalculatorForm()
         {
             InitializeComponent();
             textInput.Text = record.ToString();
             calculator = new Clac(this);
+
+            // 사용자의 AppData Roaming 폴더 경로 설정
+            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string folderPath = Path.Combine(appDataFolder, "jongho");
+
+            // 폴더가 존재하지 않으면 생성
+            Directory.CreateDirectory(folderPath);
+
+            // 파일 경로 설정 (예: 사용자이름 폴더 내의 data.txt 파일)
+            filePath = Path.Combine(folderPath, "history.txt");
+
+            // historyArray 초기화 (예시로 빈 배열로 초기화)
+            historyArray = calculator.LoadArrayFromFile(filePath);
+
+            if (historyArray.Length == 0)
+            {
+                historyArray = new string[5]; // 길이가 5인 배열로 초기화
+            }
+
+            Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : "+historyArray.Length);
+
+            // 종료 시 이벤트 핸들러 설정
+            AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
         }
 
         private bool newButton;   // 새로 숫자가 시작되어야 하는 것을 말하는 flag
@@ -419,6 +444,7 @@ namespace SimpleCalculator
 
         private void btnEqual_Click(object sender, EventArgs e)
         {
+            Console.WriteLine("btnEqual_Click 눌렀을 때 history 배열의 크기" + historyArray.Length);
             // 0으로 나누기를 체크하는 부분 추가
             if (IsDivideByZero(record))
             {
@@ -453,7 +479,9 @@ namespace SimpleCalculator
             }
            
             historyRecord = calculator.zeroCheck(historyRecord) + " = " + textResult.Text;
+            Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyRecord에 들어간 값 : "+historyRecord);
             historyArray = calculator.history(historyRecord);
+            Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyArray에 들어간 값" + historyArray[0]);
             historyRecord = finalResult.ToString();
 
             // solveCheck 설정
@@ -477,6 +505,14 @@ namespace SimpleCalculator
             // 메시지 박스에 출력합니다.
             MessageBox.Show(message, "연산 기록");
         }
+
+        private void OnProcessExit(object sender, EventArgs e)
+        {
+            calculator.SaveArrayToFile(historyArray, filePath);
+            Console.WriteLine("프로그램이 종료됩니다. 배열이 파일에 저장되었습니다.");
+        }
+
+       
 
     }
 }
