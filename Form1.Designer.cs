@@ -56,6 +56,7 @@
             this.radioButtonHexadecimal = new System.Windows.Forms.RadioButton();
             this.radioButtonDecimal = new System.Windows.Forms.RadioButton();
             this.radioButtonBinary = new System.Windows.Forms.RadioButton();
+            this.pastHistory = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btnClear
@@ -356,11 +357,21 @@
             this.radioButtonBinary.Text = "2진수";
             this.radioButtonBinary.UseVisualStyleBackColor = true;
             // 
+            // pastHistory
+            // 
+            this.pastHistory.FormattingEnabled = true;
+            this.pastHistory.ItemHeight = 15;
+            this.pastHistory.Location = new System.Drawing.Point(608, 23);
+            this.pastHistory.Name = "pastHistory";
+            this.pastHistory.Size = new System.Drawing.Size(339, 94);
+            this.pastHistory.TabIndex = 54;
+            // 
             // CalculatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 686);
+            this.Controls.Add(this.pastHistory);
             this.Controls.Add(this.radioButtonHexadecimal);
             this.Controls.Add(this.radioButtonDecimal);
             this.Controls.Add(this.radioButtonBinary);
@@ -424,6 +435,7 @@
         private System.Windows.Forms.RadioButton radioButtonHexadecimal;
         private System.Windows.Forms.RadioButton radioButtonDecimal;
         private System.Windows.Forms.RadioButton radioButtonBinary;
+        private System.Windows.Forms.ListBox pastHistory;
     }
 }
 

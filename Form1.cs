@@ -20,6 +20,7 @@ namespace SimpleCalculator
         public string record = "0";//계산 결과를 히스토리에 넣는 변수
         public string historyRecord = "0";    
         public string[] historyArray = new string[5];//히스토리를 담는 배열
+        public string[] startArray = new string[5];
         private Clac calculator;
         private string filePath;
         public CalculatorForm()
@@ -39,12 +40,17 @@ namespace SimpleCalculator
             filePath = Path.Combine(folderPath, "history.txt");
 
             // historyArray 초기화 (예시로 빈 배열로 초기화)
-            historyArray = calculator.LoadArrayFromFile(filePath);
+            startArray = calculator.LoadArrayFromFile(filePath);
 
-            if (historyArray.Length == 0)
+            foreach( string item in startArray)
             {
-                historyArray = new string[5]; // 길이가 5인 배열로 초기화
+                pastHistory.Items.Add(item);
+                Console.WriteLine("프로그램 시작시 startArray의 아이템들 : "+item);
             }
+
+            
+                historyArray = new string[5]; // 길이가 5인 배열로 초기화
+            
 
             Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : "+historyArray.Length);
 
@@ -484,11 +490,8 @@ namespace SimpleCalculator
             Console.WriteLine("=버튼을 눌렀을 때 연산 후 historyArray에 들어간 값" + historyArray[0]);
             historyRecord = finalResult.ToString();
 
-
-
             // solveCheck 설정
             solveCheck = true;
-
 
         }
     
