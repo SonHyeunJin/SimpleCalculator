@@ -393,7 +393,15 @@ namespace SimpleCalculator
         // 결과값 3자리마다 쉼표 삽입   
         private string FormatNumber(double number)
         {
-            return string.Format("{0:N}", number);
+            // 소수점이 없는 경우 정수 형태로 반환, 소수점이 있는 경우 소수점까지 포함하여 반환
+            if (number == Math.Floor(number))
+            {
+                return string.Format("{0:N0}", number); // 소수점이 없는 경우
+            }
+            else
+            {
+                return string.Format("{0:N}", number); // 소수점이 있는 경우
+            }
         }
 
         private bool IsDivideByZero(string record)
@@ -484,9 +492,9 @@ namespace SimpleCalculator
 
 
             // 결과를 textResult에 표시하고 포맷팅
-            //textResult.Text = FormatNumber(finalResult);
+            textResult.Text = FormatNumber(finalResult);
             //this.result = Convert.ToInt32(textResult.Text.Substring(0, textResult.Text.IndexOf('.')));
-            textResult.Text = stringResult;
+            //textResult.Text = stringResult;
             this.result = Convert.ToInt32(stringResult);
 
 
