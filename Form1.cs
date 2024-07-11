@@ -66,6 +66,8 @@ namespace SimpleCalculator
             f2.ShowDialog();
 
             historyArray = new string[5]; // 길이가 5인 배열로 초기화
+
+            openEveryHistory.Hide();
             
 
             Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : " + historyArray.Length);
@@ -574,6 +576,20 @@ namespace SimpleCalculator
             {
                 textResult.Text = Convert.ToString(this.result, 16);
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)//everyHistory 닫기 버튼
+        {
+            pastHistory.Hide();
+            button2.Hide();
+            openEveryHistory.Show();
+        }
+
+        private void openEveryHistory_Click(object sender, EventArgs e)
+        {
+            pastHistory.Show();
+            button2.Show();
+            openEveryHistory.Hide();
         }
     }
 }
