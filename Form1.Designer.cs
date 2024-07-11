@@ -1,6 +1,6 @@
 ﻿namespace SimpleCalculator
 {
-    partial class CalculatorForm
+    partial class closePastHistoryButton
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -56,6 +56,9 @@
             this.radioButtonHexadecimal = new System.Windows.Forms.RadioButton();
             this.radioButtonDecimal = new System.Windows.Forms.RadioButton();
             this.radioButtonBinary = new System.Windows.Forms.RadioButton();
+            this.pastHistory = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.resetPastHistory = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClear
@@ -359,11 +362,43 @@
             this.radioButtonBinary.UseVisualStyleBackColor = true;
             this.radioButtonBinary.CheckedChanged += new System.EventHandler(this.radioButtonBinary_CheckedChanged);
             // 
-            // CalculatorForm
+            // pastHistory
+            // 
+            this.pastHistory.FormattingEnabled = true;
+            this.pastHistory.ItemHeight = 15;
+            this.pastHistory.Location = new System.Drawing.Point(608, 23);
+            this.pastHistory.Name = "pastHistory";
+            this.pastHistory.Size = new System.Drawing.Size(339, 94);
+            this.pastHistory.TabIndex = 54;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(916, 23);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(31, 31);
+            this.button2.TabIndex = 56;
+            this.button2.Text = "X";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // resetPastHistory
+            // 
+            this.resetPastHistory.Location = new System.Drawing.Point(608, 125);
+            this.resetPastHistory.Name = "resetPastHistory";
+            this.resetPastHistory.Size = new System.Drawing.Size(103, 37);
+            this.resetPastHistory.TabIndex = 57;
+            this.resetPastHistory.Text = "초기화";
+            this.resetPastHistory.UseVisualStyleBackColor = true;
+            // 
+            // closePastHistoryButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 686);
+            this.ClientSize = new System.Drawing.Size(959, 686);
+            this.Controls.Add(this.resetPastHistory);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.pastHistory);
             this.Controls.Add(this.radioButtonHexadecimal);
             this.Controls.Add(this.radioButtonDecimal);
             this.Controls.Add(this.radioButtonBinary);
@@ -390,7 +425,7 @@
             this.Controls.Add(this.btn2);
             this.Controls.Add(this.textResult);
             this.Controls.Add(this.textInput);
-            this.Name = "CalculatorForm";
+            this.Name = "closePastHistoryButton";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -427,6 +462,9 @@
         private System.Windows.Forms.RadioButton radioButtonHexadecimal;
         private System.Windows.Forms.RadioButton radioButtonDecimal;
         private System.Windows.Forms.RadioButton radioButtonBinary;
+        private System.Windows.Forms.ListBox pastHistory;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button resetPastHistory;
     }
 }
 

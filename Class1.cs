@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -11,8 +12,8 @@ namespace SimpleCalculator
 {
     internal class Clac
     {
-        private CalculatorForm form;
-        public Clac(CalculatorForm formInstance)
+        private closePastHistoryButton form;
+        public Clac(closePastHistoryButton formInstance)
         {
             form = formInstance;
         }
@@ -425,22 +426,24 @@ namespace SimpleCalculator
             }
         }
 
-        public void SaveArrayToFile(string[] array, string filePath)
+        public List<string> LoadArrayFromFile(string filePath)
+{
+        List<string> loadedList = new List<string>();
+
+        if (File.Exists(filePath))
         {
-            System.IO.File.WriteAllLines(filePath, array);
+            loadedList = File.ReadAllLines(filePath).ToList();
+        }
+        else
+        {
+            // 파일이 없으면 빈 리스트 반환
+            loadedList = new List<string>();
         }
 
-        public string[] LoadArrayFromFile(string filePath)
-        {
-            if (System.IO.File.Exists(filePath))
-            {
-                return System.IO.File.ReadAllLines(filePath);
-            }
-            else
-            {
-                return new string[5]; // 파일이 없으면 5개짜리 배열로 반환
-            }
-        }
+        return loadedList;
+}
+
+
 
     }
 }
