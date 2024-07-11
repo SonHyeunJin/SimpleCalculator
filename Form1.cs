@@ -26,7 +26,7 @@ namespace SimpleCalculator
         private string filePath;
         private int result;
 
-        public CalculatorForm()
+        //public CalculatorForm()
         public closePastHistoryButton()
         {
             InitializeComponent();
