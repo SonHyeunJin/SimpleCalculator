@@ -61,10 +61,13 @@ namespace SimpleCalculator
                 Console.WriteLine("프로그램 시작시 historyList의 아이템들 : " + item);
             }
 
-            Form2 f2 = new Form2(historyList);
+          
+            Form2 f2 = new Form2(startList);
             f2.ShowDialog();
 
             historyArray = new string[5]; // 길이가 5인 배열로 초기화
+
+            openEveryHistory.Hide();
             
 
             Console.WriteLine("프로그램이 시작되자마자 historyArray의 길이 : " + historyArray.Length);
@@ -578,6 +581,37 @@ namespace SimpleCalculator
                 textResult.Text = Convert.ToString(this.result, 16);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)//everyHistory 닫기 버튼
+        {
+            pastHistory.Hide();
+            button2.Hide();
+            openEveryHistory.Show();
+        }
+
+        private void openEveryHistory_Click(object sender, EventArgs e)
+        {
+            pastHistory.Show();
+            button2.Show();
+            openEveryHistory.Hide();
+        }
+
+        private void resetPastHistory_Click(object sender, EventArgs e)//everyhistory 초기화 버튼
+        {
+            // 파일 초기화
+            File.WriteAllText(filePath, string.Empty);
+
+            // 히스토리 리스트와 리스트박스 초기화
+            historyList.Clear();
+            pastHistory.Items.Clear();
+
+            // 히스토리 배열 초기화
+            historyArray = new string[5];
+
+            // 사용자에게 알림
+            MessageBox.Show("모든 기록이 초기화되었습니다.", "초기화 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    
     }
 }
     

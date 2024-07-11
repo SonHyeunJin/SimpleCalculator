@@ -21,7 +21,8 @@ namespace SimpleCalculator
 
             foreach (string item in historyList)
             {
-                everyHistoryBox.Text = item;
+                everyHistoryBox.Text += item+"\r\n";
+                Console.WriteLine("새창에 뜰 item들 : "+item);
             }
             
         }

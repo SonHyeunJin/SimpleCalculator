@@ -59,6 +59,7 @@
             this.pastHistory = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.resetPastHistory = new System.Windows.Forms.Button();
+            this.openEveryHistory = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClear
@@ -380,6 +381,7 @@
             this.button2.TabIndex = 56;
             this.button2.Text = "X";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // resetPastHistory
             // 
@@ -389,12 +391,24 @@
             this.resetPastHistory.TabIndex = 57;
             this.resetPastHistory.Text = "초기화";
             this.resetPastHistory.UseVisualStyleBackColor = true;
+            this.resetPastHistory.Click += new System.EventHandler(this.resetPastHistory_Click);
+            // 
+            // openEveryHistory
+            // 
+            this.openEveryHistory.Location = new System.Drawing.Point(608, 23);
+            this.openEveryHistory.Name = "openEveryHistory";
+            this.openEveryHistory.Size = new System.Drawing.Size(124, 31);
+            this.openEveryHistory.TabIndex = 58;
+            this.openEveryHistory.Text = "모든기록보기";
+            this.openEveryHistory.UseVisualStyleBackColor = true;
+            this.openEveryHistory.Click += new System.EventHandler(this.openEveryHistory_Click);
             // 
             // closePastHistoryButton
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(959, 686);
+            this.Controls.Add(this.openEveryHistory);
             this.Controls.Add(this.resetPastHistory);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pastHistory);
@@ -464,6 +478,7 @@
         private System.Windows.Forms.ListBox pastHistory;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button resetPastHistory;
+        private System.Windows.Forms.Button openEveryHistory;
     }
 }
 
