@@ -34,8 +34,8 @@ namespace SimpleCalculator
             calculator = new Clac(this);
 
             // 사용자의 AppData Roaming 폴더 경로 설정
-            string appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string folderPath = Path.Combine(appDataFolder, "jongho");
+            string desktopFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string folderPath = Path.Combine(desktopFolder, "jongho");
 
             // 폴더가 존재하지 않으면 생성
             Directory.CreateDirectory(folderPath);
@@ -611,6 +611,7 @@ namespace SimpleCalculator
 
             // 히스토리 리스트와 리스트박스 초기화
             historyList.Clear();
+
             pastHistory.Items.Clear();
 
             // 히스토리 배열 초기화
