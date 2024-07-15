@@ -1,1 +1,1 @@
-https://velog.io/@dksjejrl123/포스코x코딩온-스마트팩토리-SW-개발-심화-과정-2주차7.812-C-프로그래밍-미니-프로젝트-심플한-계산기
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api/badge?name=dksjejrl123)](https://velog.io/@dksjejrl123) 
